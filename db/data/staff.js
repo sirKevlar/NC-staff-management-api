@@ -39,7 +39,7 @@ module.exports = [
         seminar_group: "seminar-1 november 2021",
         mentor_group: "mentor-1 seminar-1 november 2021",
         holidays_left: 7,
-        absences: 15,
+        absences: 1,
         pdp_scheme: "AWS cloud certification",
         computer_serial: "not#a27serial",
         fob_serial: "cheerios"
