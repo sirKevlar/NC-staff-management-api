@@ -1,6 +1,6 @@
 module.exports = [
     {
-        cohort_name: "september 2021",
+        cohort_name: "september-2021",
         status: "completed",
         type: "full-stack boot camp",
         student_count: 50,
@@ -9,7 +9,7 @@ module.exports = [
         percent_in_work: 90
     },
     {
-        cohort_name: "november 2021",
+        cohort_name: "november-2021",
         status: "completed",
         type: "full-stack boot camp",
         student_count: 70,
@@ -18,7 +18,7 @@ module.exports = [
         percent_in_work: 80
     },
     {
-        cohort_name: "january 2022",
+        cohort_name: "january-2022",
         status: "in progress",
         type: "full-stack boot camp",
         student_count: 105,

@@ -65,9 +65,20 @@ const createTables = async () => {
   );`);
 
   await Promise.all([staffTable, studentTable]);
+
+  await db.query(`
+  CREATE TABLE event_history (
+    event_id SERIAL PRIMARY KEY, 
+    staff_id INT REFERENCES staff(staff_id) NOT NULL,
+    event_date VARCHAR NOT NULL,
+    cohort_name VARCHAR REFERENCES cohorts(cohort_name) NOT NULL, 
+    seminar_group_name VARCHAR REFERENCES seminar_groups(seminar_group_name),
+    mentor_group_name VARCHAR REFERENCES mentor_groups(mentor_group_name)
+  );`);
 };
 
 const dropTables = async () => {
+  await db.query(`DROP TABLE IF EXISTS event_history;`);
   await db.query(`DROP TABLE IF EXISTS students;`);
   await db.query(`DROP TABLE IF EXISTS staff;`);
   await db.query(`DROP TABLE IF EXISTS mentor_groups;`);

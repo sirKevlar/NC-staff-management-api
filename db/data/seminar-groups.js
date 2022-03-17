@@ -1,26 +1,26 @@
 module.exports = [
-    {
-        seminar_group_name: "seminar-1 september 2021",
-        cohort_name: "september 2021",
-    },
-    {
-        seminar_group_name: "seminar-2 september 2021",
-        cohort_name: "september 2021",
-    },
-    {
-        seminar_group_name: "seminar-1 november 2021",
-        cohort_name: "november 2021",
-    },
-    {
-        seminar_group_name: "seminar-2 november 2021",
-        cohort_name: "november 2021",
-    },
-    {
-        seminar_group_name: "seminar-1 january 2022",
-        cohort_name: "january 2022",
-    },
-    {
-        seminar_group_name: "seminar-2 january 2022",
-        cohort_name: "january 2022",
-    }
-]
+  {
+    seminar_group_name: 'seminar-1_september-2021',
+    cohort_name: 'september-2021',
+  },
+  {
+    seminar_group_name: 'seminar-2_september-2021',
+    cohort_name: 'september-2021',
+  },
+  {
+    seminar_group_name: 'seminar-1_november-2021',
+    cohort_name: 'november-2021',
+  },
+  {
+    seminar_group_name: 'seminar-2_november-2021',
+    cohort_name: 'november-2021',
+  },
+  {
+    seminar_group_name: 'seminar-1_january-2022',
+    cohort_name: 'january-2022',
+  },
+  {
+    seminar_group_name: 'seminar-2_january-2022',
+    cohort_name: 'january-2022',
+  },
+];
