@@ -151,6 +151,8 @@ const seed = async ({
       console.log(rows);
     })
     .catch(console.log);
+
+  
 };
 
 module.exports = seed;
