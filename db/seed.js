@@ -146,7 +146,7 @@ const seed = async ({
   );
   const staff = await db
     .query(insertStaff)
-    .then(({ rows }) => console.log(rows))
+    .then(({ rows }) => rows)
     .catch(console.log);
 
   const insertStudents = format(
@@ -161,7 +161,7 @@ const seed = async ({
   );
   const students = await db
     .query(insertStudents)
-    .then(({ rows }) => console.log(rows))
+    .then(({ rows }) => rows)
     .catch(console.log);
 };
 
