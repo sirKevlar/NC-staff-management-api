@@ -20,6 +20,7 @@ describe('endpoints', () => {
     });
   });
 
+  /* ------- STAFF ENDPOINTS ------- */
   describe('GET /staff', () => {
     test('status 200: fetches array of staff objects', () => {
       return request(app)
@@ -44,6 +45,48 @@ describe('endpoints', () => {
               notes: expect.any(String),
             });
           });
+        });
+    });
+  });
+  describe('POST /staff', () => {
+    test('status 201: staff member created', () => {
+      return request(app)
+        .post('/api/staff')
+        .send({
+          employee_name: 'andrea catania',
+          role: 'junior software engineer and mentor',
+          campus: 'manchester',
+          team: 'classroom',
+          start_date: '2021-09-27',
+          event_id: null,
+          holidays_left: 20,
+          absences: 0,
+          pdp_scheme: 'Flutter course',
+          computer_serial: 'not#a72serial',
+          fob_serial: 'openSn0th1ng',
+          notes:
+            'Apart from the roads, the irrigation and the sanitization; what did the Romans do for us?',
+        })
+        .expect(201)
+        .then(({ body: { employee } }) => {
+          expect(employee[0]).toEqual(
+            expect.objectContaining({
+              staff_id: 7,
+              employee_name: 'andrea catania',
+              role: 'junior software engineer and mentor',
+              campus: 'manchester',
+              team: 'classroom',
+              start_date: '2021-09-27',
+              event_id: null,
+              holidays_left: 20,
+              absences: 0,
+              pdp_scheme: 'Flutter course',
+              computer_serial: 'not#a72serial',
+              fob_serial: 'openSn0th1ng',
+              notes:
+                'Apart from the roads, the irrigation and the sanitization; what did the Romans do for us?',
+            })
+          );
         });
     });
   });
