@@ -4,11 +4,12 @@ const { dropTables, createTables } = require('./manage-tables');
 
 const seed = async ({
   cohortData,
-  mentorGroupData,
+  // mentorGroupData,
   pdpData,
-  seminarGroupData,
+  // seminarGroupData,
   staffData,
   studentData,
+  eventHistoryData,
 }) => {
   await dropTables();
   await createTables();
@@ -60,40 +61,58 @@ const seed = async ({
 
   await Promise.all([cohorts, pdps]);
 
-  const insertSeminarGroups = format(
-    `INSERT INTO seminar_groups 
-      (seminar_group_name, cohort_name) 
+  const insertEvents = format(
+    `INSERT INTO events 
+      (employee_name, start_date, end_date, cohort) 
       VALUES %L RETURNING*;`,
-    seminarGroupData.map(({ seminar_group_name, cohort_name }) => [
-      seminar_group_name,
-      cohort_name,
+    eventHistoryData.map(({ employee_name, start_date, end_date, cohort }) => [
+      employee_name,
+      start_date,
+      end_date,
+      cohort,
     ])
   );
-  const seminarGroups = await db
-    .query(insertSeminarGroups)
+  const eventHistory = await db
+    .query(insertEvents)
     .then(({ rows }) => rows)
     .catch(console.log);
 
-  const insertMentorGroups = format(
-    `INSERT INTO mentor_groups 
-      (mentor_group_name, cohort_name, seminar_group_name) 
-      VALUES %L RETURNING*;`,
-    mentorGroupData.map(
-      ({ mentor_group_name, cohort_name, seminar_group_name }) => [
-        mentor_group_name,
-        cohort_name,
-        seminar_group_name,
-      ]
-    )
-  );
-  const mentorGroups = await db
-    .query(insertMentorGroups)
-    .then(({ rows }) => rows)
-    .catch(console.log);
+  // const insertSeminarGroups = format(
+  //   `INSERT INTO seminar_groups
+  //     (seminar_group_name, cohort_name)
+  //     VALUES %L RETURNING*;`,
+  //   seminarGroupData.map(({ seminar_group_name, cohort_name }) => [
+  //     seminar_group_name,
+  //     cohort_name,
+  //   ])
+  // );
+  // const seminarGroups = await db
+  //   .query(insertSeminarGroups)
+  //   .then(({ rows }) => rows)
+  //   .catch(console.log);
+
+  // const insertMentorGroups = format(
+  //   `INSERT INTO mentor_groups
+  //     (mentor_group_name, cohort_name, seminar_group_name)
+  //     VALUES %L RETURNING*;`,
+  //   mentorGroupData.map(
+  //     ({ mentor_group_name, cohort_name, seminar_group_name }) => [
+  //       mentor_group_name,
+  //       cohort_name,
+  //       seminar_group_name,
+  //     ]
+  //   )
+  // );
+  // const mentorGroups = await db
+  //   .query(insertMentorGroups)
+  //   .then(({ rows }) => rows)
+  //   .catch(console.log);
+
+  // the above has been temporarily removed
 
   const insertStaff = format(
-    `INSERT INTO staff 
-      (employee_name, role, campus, team, start_date, cohort_name, seminar_group_name, mentor_group_name, holidays_left, absences, pdp_scheme, computer_serial, fob_serial) 
+    `INSERT INTO staff
+      (employee_name, role, campus, team, start_date, event_id, holidays_left, absences, pdp_scheme, computer_serial, fob_serial, notes)
       VALUES %L RETURNING*;`,
     staffData.map(
       ({
@@ -102,57 +121,48 @@ const seed = async ({
         campus,
         team,
         start_date,
-        cohort_name,
-        seminar_group_name,
-        mentor_group_name,
+        event_id,
         holidays_left,
         absences,
         pdp_scheme,
         computer_serial,
         fob_serial,
+        notes,
       }) => [
         employee_name,
         role,
         campus,
         team,
         start_date,
-        cohort_name,
-        seminar_group_name,
-        mentor_group_name,
+        event_id,
         holidays_left,
         absences,
         pdp_scheme,
         computer_serial,
         fob_serial,
+        notes,
       ]
     )
   );
   const staff = await db
     .query(insertStaff)
-    .then(({ rows }) => rows)
+    .then(({ rows }) => console.log(rows))
     .catch(console.log);
 
   const insertStudents = format(
-    `INSERT INTO students 
-      (student_name, cohort_name, seminar_group_name, mentor_group_name) 
+    `INSERT INTO students
+      (student_name, cohort_name, notes)
       VALUES %L RETURNING*;`,
-    studentData.map(
-      ({
-        student_name,
-        cohort_name,
-        seminar_group_name,
-        mentor_group_name,
-      }) => [student_name, cohort_name, seminar_group_name, mentor_group_name]
-    )
+    studentData.map(({ student_name, cohort_name, notes }) => [
+      student_name,
+      cohort_name,
+      notes,
+    ])
   );
   const students = await db
     .query(insertStudents)
-    .then(({ rows }) => {
-      console.log(rows);
-    })
+    .then(({ rows }) => console.log(rows))
     .catch(console.log);
-
-  
 };
 
 module.exports = seed;
