@@ -1,6 +1,6 @@
 const express = require('express');
 const { getStaff, postNewStaff } = require('./controllers/staff.controllers');
-const { invalidPath } = require('./errors/errors');
+const { invalidPath, psqlErrors } = require('./errors/errors');
 
 const app = express();
 
@@ -12,5 +12,7 @@ app.get('/api/staff', getStaff);
 app.post('/api/staff', postNewStaff);
 
 app.all('/*', invalidPath);
+
+app.use(psqlErrors);
 
 module.exports = app;

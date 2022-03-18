@@ -5,7 +5,7 @@ exports.getStaff = (req, res, next) => {
     .then((staff) => {
       res.status(200).send({ staff });
     })
-    .catch(console.log);
+    .catch(next);
 };
 
 exports.postNewStaff = (req, res, next) => {
@@ -13,5 +13,5 @@ exports.postNewStaff = (req, res, next) => {
     .then((employee) => {
       res.status(201).send({ employee });
     })
-    .catch(console.log);
+    .catch(next);
 };
