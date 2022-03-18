@@ -1,5 +1,5 @@
 const express = require('express');
-const { getStaff } = require('./controllers/staff.controllers');
+const { getStaff, postNewStaff } = require('./controllers/staff.controllers');
 const { invalidPath } = require('./errors/errors');
 
 const app = express();
@@ -8,6 +8,8 @@ const app = express();
 app.use(express.json());
 
 app.get('/api/staff', getStaff);
+
+app.post('/api/staff', postNewStaff);
 
 app.all('/*', invalidPath);
 

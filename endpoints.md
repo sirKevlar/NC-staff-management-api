@@ -4,7 +4,7 @@
 fetch details of available endpoints
 
 `GET /staff`
-fetch array of staff objects
+fetch array of staff objects ✅
 
 `POST /staff`
 post a new staff object
@@ -64,7 +64,7 @@ fetch array of cohort objects
 post a new cohort object
 
 fetch individual cohort object by id
-`GET /cohorts/:cohort_id` 
+`GET /cohorts/:cohort_id`
 **basic cohort deets number of students/dates etc**
 
 `PATCH /cohorts/:cohort_id`
@@ -99,6 +99,5 @@ fetch array of event history objects
 
 `POST /event.history`
 post a new event object
-
 
 **Do we need endpoints for getting all the staff associated with a student? YES**
