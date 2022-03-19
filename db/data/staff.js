@@ -3,7 +3,7 @@ module.exports = [
     employee_name: 'kev morel',
     role: 'junior-software-engineer-and-mentor',
     campus: 'manchester',
-    team: 'classroom',
+    team: 'classroom-clown',
     start_date: new Date('2021-09-20'),
     event_id: 1,
     holidays_left: 20,
