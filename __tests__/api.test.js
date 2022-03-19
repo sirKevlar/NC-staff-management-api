@@ -81,6 +81,33 @@ describe('endpoints', () => {
           expect(staff[3].employee_name).toBe('dominic harris');
         });
     });
+    test('status 404: role filter value not found', () => {
+      return request(app)
+        .get('/api/staff?role=wild-card')
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe('filter value not found');
+        });
+    });
+    test('status 200: role query to filter by campus', () => {
+      return request(app)
+        .get('/api/staff?campus=manchester')
+        .expect(200)
+        .then(({ body: { staff } }) => {
+          expect(staff).toHaveLength(3);
+          expect(staff[0].employee_name).toBe('kev morel');
+          expect(staff[1].employee_name).toBe('rose mullan');
+          expect(staff[2].employee_name).toBe('sam parry');
+        });
+    });
+    test('status 404: role filter value not found', () => {
+      return request(app)
+        .get('/api/staff?role=wild-card')
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe('filter value not found');
+        });
+    });
   });
 
   /* ------- POST STAFF ENDPOINTS ------- */
