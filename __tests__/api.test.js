@@ -273,7 +273,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET STAFF BY ID ENDPOINTS ------- */
-  describe('GET /staff/:staff_id', () => {
+  xdescribe('GET /staff/:staff_id', () => {
     test('status 200: fetches single employee object', () => {
       return request(app)
         .get('/api/staff/1')
@@ -312,6 +312,34 @@ describe('endpoints', () => {
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe('id not found');
+        });
+    });
+  });
+  /* ------- PATCH STAFF BY ID ENDPOINTS ------- */
+  describe('PATCH /staff/:staff_id', () => {
+    test('status 200: returns patched employee object', () => {
+      return request(app)
+        .patch('/api/staff/1')
+        .send({ holidays_left: 15 })
+        .expect(200)
+        .then(({ body: { employee } }) => {
+          expect(employee).toEqual(
+            expect.objectContaining({
+              staff_id: 1,
+              employee_name: 'kev morel',
+              role: 'junior-software-engineer-and-mentor',
+              campus: 'manchester',
+              team: 'classroom-clown',
+              start_date: expect.any(String),
+              event_id: 1,
+              holidays_left: 15,
+              absences: 0,
+              pdp_scheme: 'AWS-cloud-certification',
+              computer_serial: 'not#a12serial',
+              fob_serial: 'open2n0th1ng',
+              notes: 'Not the messiah, just a very naughty boy',
+            })
+          );
         });
     });
   });

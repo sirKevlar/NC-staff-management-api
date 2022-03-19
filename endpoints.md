@@ -19,16 +19,13 @@ fetch array of staff objects filtered by seminar_group, sorted by date, flexible
 fetch array of staff objects filtered by seminar_group, sorted by date, flexible order -->
 
 `GET /staff/:staff_id`
-fetch individual staff object by id
+fetch individual staff object by id ✅
 
 `PATCH /staff/:staff_id`
 append existing individual staff object by id
 
 `DELETE /staff/:staff_id`
 delete existing individual staff object by id
-
-`GET /staff/:staff_id/pdp`
-fetch individual staff pdp details by staff id
 
 `GET /staff/:staff_id/students`
 fetch array of students by staff_id
