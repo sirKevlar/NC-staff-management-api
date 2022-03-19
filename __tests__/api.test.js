@@ -51,7 +51,7 @@ describe('endpoints', () => {
 
   /* ------- GET STAFF QUERIES ENDPOINTS ------- */
   describe('GET /staff queries', () => {
-    test('status 200: currentCohort query to filter by currentCohort', () => {
+    test('status 200: query to filter by currentCohort', () => {
       return request(app)
         .get('/api/staff?currentCohort=september-2021')
         .expect(200)
@@ -69,7 +69,7 @@ describe('endpoints', () => {
           expect(body.msg).toBe('filter value not found');
         });
     });
-    test('status 200: role query to filter by role', () => {
+    test('status 200: query to filter by role', () => {
       return request(app)
         .get('/api/staff?role=junior-software-engineer-and-mentor')
         .expect(200)
@@ -89,7 +89,7 @@ describe('endpoints', () => {
           expect(body.msg).toBe('filter value not found');
         });
     });
-    test('status 200: campus query to filter by campus', () => {
+    test('status 200: query to filter by campus', () => {
       return request(app)
         .get('/api/staff?campus=manchester')
         .expect(200)
@@ -108,7 +108,7 @@ describe('endpoints', () => {
           expect(body.msg).toBe('filter value not found');
         });
     });
-    test('status 200: team query to filter by team', () => {
+    test('status 200: query to filter by team', () => {
       return request(app)
         .get('/api/staff?team=classroom')
         .expect(200)
@@ -124,6 +124,25 @@ describe('endpoints', () => {
     test('status 404: team filter value not found', () => {
       return request(app)
         .get('/api/staff?team=listo_negotiators')
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe('filter value not found');
+        });
+    });
+    test('status 200: query to fiter by pdp_scheme', () => {
+      return request(app)
+        .get('/api/staff?pdp_scheme=SCRUM-certification')
+        .expect(200)
+        .then(({ body: { staff } }) => {
+          expect(staff).toHaveLength(3);
+          expect(staff[0].employee_name).toBe('rose mullan');
+          expect(staff[1].employee_name).toBe('poonam rajput');
+          expect(staff[2].employee_name).toBe('vel georgieva');
+        });
+    });
+    test('status 404: pdp_scheme filter value not found', () => {
+      return request(app)
+        .get('/api/pdp_scheme=jedi-training')
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe('filter value not found');
