@@ -66,7 +66,19 @@ describe('endpoints', () => {
         .get('/api/staff?currentCohort=september-2022')
         .expect(404)
         .then(({ body }) => {
-          expect(body.msg).toBe('cohort not found');
+          expect(body.msg).toBe('filter value not found');
+        });
+    });
+    test('status 200: role query to filter by role', () => {
+      return request(app)
+        .get('/api/staff?role=junior-software-engineer-and-mentor')
+        .expect(200)
+        .then(({ body: { staff } }) => {
+          expect(staff).toHaveLength(4);
+          expect(staff[0].employee_name).toBe('kev morel');
+          expect(staff[1].employee_name).toBe('rose mullan');
+          expect(staff[2].employee_name).toBe('sam parry');
+          expect(staff[3].employee_name).toBe('dominic harris');
         });
     });
   });
@@ -78,14 +90,14 @@ describe('endpoints', () => {
         .post('/api/staff')
         .send({
           employee_name: 'andrea catania',
-          role: 'junior software engineer and mentor',
+          role: 'junior-software-engineer-and-mentor',
           campus: 'manchester',
           team: 'classroom',
           start_date: Date.now(),
           event_id: null,
           holidays_left: 20,
           absences: 0,
-          pdp_scheme: 'Flutter course',
+          pdp_scheme: 'Flutter-course',
           computer_serial: 'not#a72serial',
           fob_serial: 'openSn0th1ng',
           notes:
@@ -97,14 +109,14 @@ describe('endpoints', () => {
             expect.objectContaining({
               staff_id: 7,
               employee_name: 'andrea catania',
-              role: 'junior software engineer and mentor',
+              role: 'junior-software-engineer-and-mentor',
               campus: 'manchester',
               team: 'classroom',
               start_date: expect.any(String),
               event_id: null,
               holidays_left: 20,
               absences: 0,
-              pdp_scheme: 'Flutter course',
+              pdp_scheme: 'Flutter-course',
               computer_serial: 'not#a72serial',
               fob_serial: 'openSn0th1ng',
               notes:

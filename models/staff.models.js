@@ -1,20 +1,23 @@
 const db = require('../db');
 
-exports.selectStaff = ({ currentCohort }) => {
+exports.selectStaff = ({ currentCohort, role }) => {
   let queryStr = `SELECT * FROM staff`;
+  let queryInsert;
 
   if (currentCohort) {
+    queryInsert = currentCohort;
     queryStr += ` LEFT JOIN events ON events.event_id = staff.event_id
       WHERE events.cohort = $1`;
+  } else if (role) {
+    queryInsert = role;
+    queryStr += ` WHERE role = $1`;
   }
-  return db
-    .query(queryStr, [currentCohort])
-    .then(({ rows }) => {
-      if (rows.length === 0) {
-        return Promise.reject({ status: 404, msg: 'cohort not found' });
-      }
-      return rows;
-    })
+  return db.query(queryStr, [queryInsert]).then(({ rows }) => {
+    if (rows.length === 0) {
+      return Promise.reject({ status: 404, msg: 'filter value not found' });
+    }
+    return rows;
+  });
 };
 
 exports.insertNewStaff = ({
