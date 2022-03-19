@@ -129,7 +129,7 @@ describe('endpoints', () => {
           expect(body.msg).toBe('filter value not found');
         });
     });
-    test('status 200: query to fiter by pdp_scheme', () => {
+    test('status 200: query to filter by pdp_scheme', () => {
       return request(app)
         .get('/api/staff?pdp_scheme=SCRUM-certification')
         .expect(200)
@@ -142,7 +142,7 @@ describe('endpoints', () => {
     });
     test('status 404: pdp_scheme filter value not found', () => {
       return request(app)
-        .get('/api/pdp_scheme=jedi-training')
+        .get('/api/staff?pdp_scheme=jedi_training')
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe('filter value not found');

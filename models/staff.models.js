@@ -1,6 +1,6 @@
 const db = require('../db');
 
-exports.selectStaff = ({ currentCohort, role, campus, team }) => {
+exports.selectStaff = ({ currentCohort, role, campus, team, pdp_scheme }) => {
   let queryStr = `SELECT * FROM staff`;
   let queryInsert;
 
@@ -13,10 +13,13 @@ exports.selectStaff = ({ currentCohort, role, campus, team }) => {
     queryStr += ` WHERE role = $1`;
   } else if (campus) {
     queryInsert = campus;
-    queryStr += ` WHERE campus = $1`
+    queryStr += ` WHERE campus = $1`;
   } else if (team) {
     queryInsert = team;
-    queryStr += ` WHERE team = $1`
+    queryStr += ` WHERE team = $1`;
+  } else if (pdp_scheme) {
+    queryInsert = pdp_scheme;
+    queryStr += ` WHERE pdp_scheme = $1`;
   }
   return db.query(queryStr, [queryInsert]).then(({ rows }) => {
     if (rows.length === 0) {
