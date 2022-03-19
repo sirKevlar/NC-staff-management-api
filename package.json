@@ -13,6 +13,7 @@
   "main": "index.js",
   "scripts": {
     "setup-dbs": "psql -f db/setup.sql",
+    "dbview": "psql -f scrap.sql > scrap.txt",
     "test": "jest",
     "dev": "nodemon listen.js",
     "start": "node listen.js",

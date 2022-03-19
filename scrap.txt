@@ -1,0 +1,7 @@
+You are now connected to database "nc_staff_management" as user "kevmorel-nc".
+ staff_id | employee_name |                role                 |   campus   |   team    |         start_date         | event_id | holidays_left | absences |       pdp_scheme        | computer_serial |  fob_serial  |                  notes                   | event_id | employee_name | start_date |  end_date  |     cohort     
+----------+---------------+-------------------------------------+------------+-----------+----------------------------+----------+---------------+----------+-------------------------+-----------------+--------------+------------------------------------------+----------+---------------+------------+------------+----------------
+        1 | kev morel     | junior software engineer and mentor | manchester | classroom | 2021-09-20 00:00:00.000+00 |        1 |            20 |        0 | AWS cloud certification | not#a12serial   | open2n0th1ng | Not the messiah, just a very naughty boy |        1 | kev morel     | 2021-09-20 | 2021-12-20 | september-2021
+        2 | rose mullan   | junior software engineer and mentor | manchester | classroom | 2021-09-20 00:00:00.000+00 |        2 |            18 |        1 | SCRUM certification     | not#a17serial   | open3n0th1ng | Knows the weight of an African Sparrow   |        2 | rose mullan   | 2021-09-20 | 2021-12-20 | september-2021
+(2 rows)
+

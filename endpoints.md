@@ -7,7 +7,7 @@ fetch details of available endpoints
 fetch array of staff objects ✅
 
 `POST /staff`
-post a new staff object
+post a new staff object ✅
 
 `GET /staff?cohort=:cohort_name&sort=date&order=:order`
 fetch array of staff objects filtered by cohort, sorted by date, flexible order

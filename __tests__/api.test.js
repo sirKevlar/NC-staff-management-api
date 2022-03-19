@@ -53,7 +53,7 @@ describe('endpoints', () => {
   describe('GET /staff queries', () => {
     test('status 200: currentCohort query to filter by currentCohort', () => {
       return request(app)
-        .get('/api/staff?cohort=september-2021')
+        .get('/api/staff?currentCohort=september-2021')
         .expect(200)
         .then(({ body: { staff } }) => {
           expect(staff).toHaveLength(2);

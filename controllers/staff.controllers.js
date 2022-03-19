@@ -1,7 +1,7 @@
 const { selectStaff, insertNewStaff } = require('../models/staff.models');
 
 exports.getStaff = (req, res, next) => {
-  selectStaff()
+  selectStaff(req.query)
     .then((staff) => {
       res.status(200).send({ staff });
     })
