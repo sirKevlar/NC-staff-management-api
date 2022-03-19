@@ -33,14 +33,12 @@ exports.selectStaff = ({
     LEFT JOIN students ON events.cohort = students.cohort_name 
     WHERE student_id = $1`;
   }
-  return db
-    .query(queryStr, [queryInsert])
-    .then(({ rows }) => {
-      if (rows.length === 0) {
-        return Promise.reject({ status: 404, msg: 'filter value not found' });
-      }
-      return rows;
-    })
+  return db.query(queryStr, [queryInsert]).then(({ rows }) => {
+    if (rows.length === 0) {
+      return Promise.reject({ status: 404, msg: 'filter value not found' });
+    }
+    return rows;
+  });
 };
 
 exports.insertNewStaff = ({
@@ -80,4 +78,10 @@ exports.insertNewStaff = ({
       ]
     )
     .then(({ rows }) => rows);
+};
+
+exports.selectStaffById = ({ staff_id }) => {
+  return db
+    .query(`SELECT * FROM staff WHERE staff_id = $1`, [staff_id])
+    .then(({ rows }) => rows[0])
 };

@@ -9,11 +9,8 @@ fetch array of staff objects ✅
 `POST /staff`
 post a new staff object ✅
 
-`GET /staff?cohort=:cohort_name&sort=date&order=:order`
-fetch array of staff objects filtered by (currentCohort/role/campus/team/pdp_scheme/student), sorted by date, flexible order
-
-`GET /staff?student=:student`
-fetch array of staff objects filtered by cohort, sorted by date, flexible order
+`GET /staff?:query=:quertValue`
+fetch array of staff objects filtered by (currentCohort/role/campus/team/pdp_scheme/student) ✅
 
 <!-- `GET /staff?seminar=:seminar_name&sort=date&order=:order`
 fetch array of staff objects filtered by seminar_group, sorted by date, flexible order
@@ -54,7 +51,7 @@ fetch array of staff objects by mentor group -->
 `PATCH /students/:student_id`
 append existing individual student object by id
 
-`DELETE /students/:staff_id`
+`DELETE /students/:student_id`
 delete existing individual student object by id
 
 `GET /cohorts`

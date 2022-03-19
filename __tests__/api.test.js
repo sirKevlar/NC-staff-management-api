@@ -286,7 +286,7 @@ describe('endpoints', () => {
               role: 'junior-software-engineer-and-mentor',
               campus: 'manchester',
               team: 'classroom-clown',
-              start_date: new Date('2021-09-20'),
+              start_date: expect.any(String),
               event_id: 1,
               holidays_left: 20,
               absences: 0,

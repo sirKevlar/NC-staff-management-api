@@ -1,4 +1,8 @@
-const { selectStaff, insertNewStaff } = require('../models/staff.models');
+const {
+  selectStaff,
+  insertNewStaff,
+  selectStaffById,
+} = require('../models/staff.models');
 
 exports.getStaff = (req, res, next) => {
   selectStaff(req.query)
@@ -12,6 +16,14 @@ exports.postNewStaff = (req, res, next) => {
   insertNewStaff(req.body)
     .then((employee) => {
       res.status(201).send({ employee });
+    })
+    .catch(next);
+};
+
+exports.getStaffById = (req, res, next) => {
+  selectStaffById(req.params)
+    .then((employee) => {
+      res.status(200).send({ employee });
     })
     .catch(next);
 };
