@@ -174,8 +174,15 @@ describe('endpoints', () => {
           expect(body.msg).toBe('filter value not found');
         });
     });
+    test('status 400: invalid query key', () => {
+      return request(app)
+        .get('/api/staff?invalid=key')
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
   });
-
   /* ------- POST STAFF ENDPOINTS ------- */
   xdescribe('POST /staff', () => {
     test('status 201: staff member created', () => {

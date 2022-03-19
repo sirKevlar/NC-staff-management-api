@@ -83,4 +83,18 @@ module.exports = [
     mentor_group_name: 'mentor-1_seminar-2_january-2022',
     notes: 'something interesting'
   },
+  {
+    student_name: 'jonte thewlis',
+    cohort_name: 'january-2020',
+    seminar_group_name: 'seminar-1_january-2020',
+    mentor_group_name: 'mentor-1_seminar-2_january-2020',
+    notes: 'something interesting'
+  },
+  {
+    student_name: 'jaqueline thewlis',
+    cohort_name: 'january-2020',
+    seminar_group_name: 'seminar-1_january-2020',
+    mentor_group_name: 'mentor-1_seminar-2_january-2020',
+    notes: 'something interesting'
+  },
 ];

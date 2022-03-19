@@ -35,4 +35,10 @@ module.exports = [
     end_date: '2022-04-20',
     cohort: 'january-2022',
   },
+  {
+    employee_name: 'vel georgieva',
+    start_date: '2020-01-20',
+    end_date: '2020-04-20',
+    cohort: 'january-2020',
+  },
 ];

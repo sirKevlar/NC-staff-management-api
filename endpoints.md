@@ -10,7 +10,7 @@ fetch array of staff objects ✅
 post a new staff object ✅
 
 `GET /staff?cohort=:cohort_name&sort=date&order=:order`
-fetch array of staff objects filtered by cohort, sorted by date, flexible order
+fetch array of staff objects filtered by (currentCohort/role/campus/team/pdp_scheme/student), sorted by date, flexible order
 
 `GET /staff?student=:student`
 fetch array of staff objects filtered by cohort, sorted by date, flexible order

@@ -29,7 +29,7 @@ exports.selectStaff = ({
     queryStr += ` WHERE pdp_scheme = $1`;
   } else if (student) {
     queryInsert = student;
-    queryStr += ` LEFT JOIN events ON events.event_id = staff.event_id 
+    queryStr += ` LEFT JOIN events ON staff.employee_name = events.employee_name 
     LEFT JOIN students ON events.cohort = students.cohort_name 
     WHERE student_id = $1`;
   }

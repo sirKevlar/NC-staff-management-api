@@ -3,7 +3,7 @@ exports.invalidPath = (req, res) => {
 };
 
 exports.psqlErrors = (err, req, res, next) => {
-  if (err.code === '23502' || err.code === '22P02') {
+  if (err.code === '23502' || err.code === '22P02' || err.code === '08P01') {
     res.status(400).send({ msg: 'Bad request' });
   } else {
     next(err);
