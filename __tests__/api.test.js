@@ -57,8 +57,15 @@ describe('endpoints', () => {
         .expect(200)
         .then(({ body: { staff } }) => {
           expect(staff).toHaveLength(2);
-          expect(staff[0].employee_name).toBe('kev morel')
-          expect(staff[1].employee_name).toBe('rose mullan')
+          expect(staff[0].employee_name).toBe('kev morel');
+          expect(staff[1].employee_name).toBe('rose mullan');
+        });
+    });
+    test('status 404: currentCohort filter value not found', () => {
+      return request(app)
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe('not found');
         });
     });
   });
