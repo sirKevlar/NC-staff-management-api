@@ -1,6 +1,6 @@
 const db = require('../db');
 
-exports.selectStaff = ({ currentCohort, role }) => {
+exports.selectStaff = ({ currentCohort, role, campus }) => {
   let queryStr = `SELECT * FROM staff`;
   let queryInsert;
 
@@ -11,6 +11,9 @@ exports.selectStaff = ({ currentCohort, role }) => {
   } else if (role) {
     queryInsert = role;
     queryStr += ` WHERE role = $1`;
+  } else if (campus) {
+    queryInsert = campus;
+    queryStr += ` WHERE campus = $1`
   }
   return db.query(queryStr, [queryInsert]).then(({ rows }) => {
     if (rows.length === 0) {
