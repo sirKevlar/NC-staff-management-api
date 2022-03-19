@@ -148,6 +148,24 @@ describe('endpoints', () => {
           expect(body.msg).toBe('filter value not found');
         });
     });
+    test('status 200: query to filter by student', () => {
+      return request(app)
+        .get('/api/staff?student=12')
+        .expect(200)
+        .then(({ body: { staff } }) => {
+          expect(staff).toHaveLength(2);
+          expect(staff[0].employee_name).toBe('vel georgieva');
+          expect(staff[1].employee_name).toBe('dominic harris');
+        });
+    });
+    test('status 404: student filter value not found', () => {
+      return request(app)
+        .get('/api/staff?student=not-a-number')
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe('filter value not found');
+        });
+    });
   });
 
   /* ------- POST STAFF ENDPOINTS ------- */
