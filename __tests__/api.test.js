@@ -298,5 +298,21 @@ describe('endpoints', () => {
           );
         });
     });
+    test('status 400: invalid staff_id', () => {
+      return request(app)
+        .get('/api/staff/not-a-number')
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+    test('status 404: valid but non existent id', () => {
+      return request(app)
+        .get('/api/staff/7777')
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe('id not found');
+        });
+    });
   });
 });
