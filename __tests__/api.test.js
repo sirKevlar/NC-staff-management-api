@@ -63,9 +63,10 @@ describe('endpoints', () => {
     });
     test('status 404: currentCohort filter value not found', () => {
       return request(app)
+        .get('/api/staff?currentCohort=september-2022')
         .expect(404)
         .then(({ body }) => {
-          expect(body.msg).toBe('not found');
+          expect(body.msg).toBe('cohort not found');
         });
     });
   });

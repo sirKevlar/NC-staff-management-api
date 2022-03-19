@@ -10,9 +10,11 @@ exports.selectStaff = ({ currentCohort }) => {
   return db
     .query(queryStr, [currentCohort])
     .then(({ rows }) => {
+      if (rows.length === 0) {
+        return Promise.reject({ status: 404, msg: 'cohort not found' });
+      }
       return rows;
     })
-    .catch(console.log);
 };
 
 exports.insertNewStaff = ({
