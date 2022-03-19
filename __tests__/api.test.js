@@ -48,6 +48,21 @@ describe('endpoints', () => {
         });
     });
   });
+
+  /* ------- GET STAFF QUERIES ENDPOINTS ------- */
+  describe('GET /staff queries', () => {
+    test('status 200: currentCohort query to filter by currentCohort', () => {
+      return request(app)
+        .get('/api/staff?cohort=september-2021')
+        .expect(200)
+        .then(({ body: { staff } }) => {
+          expect(staff).toHaveLength(2);
+          expect(staff[0].employee_name).toBe('kev morel')
+          expect(staff[1].employee_name).toBe('rose mullan')
+        });
+    });
+  });
+
   /* ------- POST STAFF ENDPOINTS ------- */
   xdescribe('POST /staff', () => {
     test('status 201: staff member created', () => {
@@ -58,7 +73,7 @@ describe('endpoints', () => {
           role: 'junior software engineer and mentor',
           campus: 'manchester',
           team: 'classroom',
-          start_date: '2021-09-27',
+          start_date: Date.now(),
           event_id: null,
           holidays_left: 20,
           absences: 0,
@@ -77,7 +92,7 @@ describe('endpoints', () => {
               role: 'junior software engineer and mentor',
               campus: 'manchester',
               team: 'classroom',
-              start_date: '2021-09-27',
+              start_date: expect.any(String),
               event_id: null,
               holidays_left: 20,
               absences: 0,
@@ -98,7 +113,7 @@ describe('endpoints', () => {
           role: 'junior software engineer and mentor',
           campus: 'manchester',
           team: 'classroom',
-          start_date: '2021-09-27',
+          start_date: Date.now(),
           event_id: null,
           holidays_left: 20,
           absences: 0,
@@ -121,7 +136,7 @@ describe('endpoints', () => {
           role: 'junior software engineer and mentor',
           campus: 'manchester',
           team: 'classroom',
-          start_date: '2021-09-27',
+          start_date: Date.now(),
           event_id: null,
           holidays_left: 'NOT-A-NUMBER',
           absences: 0,
