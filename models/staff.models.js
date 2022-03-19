@@ -1,6 +1,13 @@
 const db = require('../db');
 
-exports.selectStaff = ({ currentCohort, role, campus, team, pdp_scheme }) => {
+exports.selectStaff = ({
+  currentCohort,
+  role,
+  campus,
+  team,
+  pdp_scheme,
+  student,
+}) => {
   let queryStr = `SELECT * FROM staff`;
   let queryInsert;
 
@@ -20,13 +27,20 @@ exports.selectStaff = ({ currentCohort, role, campus, team, pdp_scheme }) => {
   } else if (pdp_scheme) {
     queryInsert = pdp_scheme;
     queryStr += ` WHERE pdp_scheme = $1`;
+  } else if (student) {
+    queryInsert = student;
+    queryStr += ` LEFT JOIN events ON events.event_id = staff.event_id 
+    LEFT JOIN students ON events.cohort = students.cohort_name 
+    WHERE student_id = $1`;
   }
-  return db.query(queryStr, [queryInsert]).then(({ rows }) => {
-    if (rows.length === 0) {
-      return Promise.reject({ status: 404, msg: 'filter value not found' });
-    }
-    return rows;
-  });
+  return db
+    .query(queryStr, [queryInsert])
+    .then(({ rows }) => {
+      if (rows.length === 0) {
+        return Promise.reject({ status: 404, msg: 'filter value not found' });
+      }
+      return rows;
+    })
 };
 
 exports.insertNewStaff = ({

@@ -158,9 +158,17 @@ describe('endpoints', () => {
           expect(staff[1].employee_name).toBe('dominic harris');
         });
     });
-    test('status 404: student filter value not found', () => {
+    test('status 400: student filter value not valid', () => {
       return request(app)
         .get('/api/staff?student=not-a-number')
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+    test('status 404: student filter value not found', () => {
+      return request(app)
+        .get('/api/staff?student=7777')
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe('filter value not found');
