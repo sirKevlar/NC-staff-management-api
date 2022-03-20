@@ -1,4 +1,3 @@
-const { location } = require('express/lib/response');
 const db = require('../db');
 
 exports.selectStudents = ({ cohort }) => {
