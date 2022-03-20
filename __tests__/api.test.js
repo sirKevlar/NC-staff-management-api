@@ -487,4 +487,38 @@ describe('endpoints', () => {
         });
     });
   });
+  /* ------- GET STUDENT BY ID ENDPOINTS ------- */
+  describe('GET /student/:student_id', () => {
+    test('status 200: fetches single student object', () => {
+      return request(app)
+        .get('/api/students/1')
+        .expect(200)
+        .then(({ body: { student } }) => {
+          expect(student).toEqual(
+            expect.objectContaining({
+              student_id: 1,
+              student_name: 'john smith',
+              cohort_name: 'september-2021',
+              notes: 'something interesting',
+            })
+          );
+        });
+    });
+    test('status 400: invalid student_id', () => {
+      return request(app)
+        .get('/api/students/not-a-number')
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+    test('status 404: valid but non existent id', () => {
+      return request(app)
+        .get('/api/students/7777')
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe('id not found');
+        });
+    });
+  });
 });
