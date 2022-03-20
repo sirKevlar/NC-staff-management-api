@@ -342,5 +342,23 @@ describe('endpoints', () => {
           );
         });
     });
+    test('status 400: invalid value on patch body', () => {
+      return request(app)
+      .patch('/api/staff/1')
+        .send({ holidays_left: 'not-a-number' })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+    test('status 400: invalid key on patch body', () => {
+      return request(app)
+      .patch('/api/staff/1')
+        .send({ invalid_key: 15 })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
   });
 });
