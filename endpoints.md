@@ -31,7 +31,7 @@ delete existing individual staff object by id ✅
 fetch array of student objects ✅
 
 `POST /students`
-post a new student object
+post a new student object ✅
 
 `GET /students?cohort=:cohort`
 fetch array of student objects filtered by cohort

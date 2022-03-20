@@ -385,7 +385,7 @@ describe('endpoints', () => {
     });
   });
   /* -------------------------------
-   ------- STUDENT ENDPOINTS ------- 
+   ------- STUDENTS ENDPOINTS ------- 
    ------------------------------- */
   xdescribe('GET /students', () => {
     test('status 200: fetches array of student objects', () => {
@@ -408,7 +408,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- POST STUDENT ENDPOINTS ------- */
-  describe('POST /students', () => {
+  xdescribe('POST /students', () => {
     test('status 201: student created', () => {
       return request(app)
         .post('/api/students')
@@ -450,6 +450,37 @@ describe('endpoints', () => {
           cohort_name: 'january-2022',
           notes: 'something interesting',
         })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+  });
+  /* ------- GET STUDENTS QUERIES ENDPOINTS ------- */
+  describe('GET /students queries', () => {
+    test('status 200: query to filter by cohort', () => {
+      return request(app)
+        .get('/api/students?cohort=september-2021')
+        .expect(200)
+        .then(({ body: { students } }) => {
+          expect(students).toHaveLength(4);
+          expect(students[0].student_name).toBe('john smith');
+          expect(students[1].student_name).toBe('jane smith');
+          expect(students[2].student_name).toBe('jim jones');
+          expect(students[3].student_name).toBe('joan jones');
+        });
+    });
+    test('status 404: cohort filter value not found', () => {
+      return request(app)
+        .get('/api/students?cohort=september-2042')
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe('filter value not found');
+        });
+    });
+    test('status 400: invalid query key', () => {
+      return request(app)
+        .get('/api/students?invalid=key')
         .expect(400)
         .then(({ body }) => {
           expect(body.msg).toBe('Bad request');
