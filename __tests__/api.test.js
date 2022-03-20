@@ -206,7 +206,7 @@ describe('endpoints', () => {
         })
         .expect(201)
         .then(({ body: { employee } }) => {
-          expect(employee[0]).toEqual(
+          expect(employee).toEqual(
             expect.objectContaining({
               staff_id: 7,
               employee_name: 'andrea catania',
@@ -387,7 +387,7 @@ describe('endpoints', () => {
   /* -------------------------------
    ------- STUDENT ENDPOINTS ------- 
    ------------------------------- */
-  describe('GET /students', () => {
+  xdescribe('GET /students', () => {
     test('status 200: fetches array of student objects', () => {
       return request(app)
         .get('/api/students')
@@ -404,6 +404,63 @@ describe('endpoints', () => {
               notes: expect.any(String),
             });
           });
+        });
+    });
+  });
+  /* ------- POST STUDENT ENDPOINTS ------- */
+  describe('POST /students', () => {
+    test('status 201: student created', () => {
+      return request(app)
+        .post('/api/students')
+        .send({
+          student_name: 'jespen haarne',
+          cohort_name: 'march-2022',
+          seminar_group_name: 'seminar-1_march-2022',
+          mentor_group_name: 'mentor-1_seminar-2_march-2022',
+          notes: 'something interesting',
+        })
+        .expect(201)
+        .then(({ body: { student } }) => {
+          expect(student).toEqual(
+            expect.objectContaining({
+              student_id: 15,
+              student_name: 'jespen haarne',
+              cohort_name: 'march-2022',
+              seminar_group_name: 'seminar-1_march-2022',
+              mentor_group_name: 'mentor-1_seminar-2_march-2022',
+              notes: 'something interesting',
+            })
+          );
+        });
+    });
+    test('status 400: invalid body key', () => {
+      return request(app)
+        .post('/api/students')
+        .send({
+          invalid_key: 'jespen haarne',
+          cohort_name: 'march-2022',
+          seminar_group_name: 'seminar-1_march-2022',
+          mentor_group_name: 'mentor-1_seminar-2_march-2022',
+          notes: 'something interesting',
+        })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+    test('status 400: invalid body value', () => {
+      return request(app)
+        .post('/api/students')
+        .send({
+          student_name: null,
+          cohort_name: 'march-2022',
+          seminar_group_name: 'seminar-1_march-2022',
+          mentor_group_name: 'mentor-1_seminar-2_march-2022',
+          notes: 'something interesting',
+        })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
         });
     });
   });
