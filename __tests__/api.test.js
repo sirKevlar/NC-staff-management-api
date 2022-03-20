@@ -362,4 +362,26 @@ describe('endpoints', () => {
         });
     });
   });
+  /* ------- DELETE STAFF BY ID ENDPOINTS ------- */
+  describe('DELETE /staff/:staff_id', () => {
+    test('status 204: employee deleted', () => {
+      return request(app).delete('/api/staff/1').expect(204);
+    });
+    test('status 400: invalid staff_id', () => {
+      return request(app)
+        .delete('/api/staff/not-a-number')
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+    test('status 404: valid but non existent id', () => {
+      return request(app)
+        .delete('/api/staff/7777')
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe('id not found');
+        });
+    });
+  });
 });

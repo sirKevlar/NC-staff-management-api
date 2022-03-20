@@ -22,7 +22,7 @@ fetch array of staff objects filtered by seminar_group, sorted by date, flexible
 fetch individual staff object by id ✅
 
 `PATCH /staff/:staff_id`
-append existing individual staff object by id
+append existing individual staff object by id ✅
 
 `DELETE /staff/:staff_id`
 delete existing individual staff object by id
