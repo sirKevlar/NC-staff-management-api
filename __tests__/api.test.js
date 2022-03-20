@@ -550,13 +550,13 @@ describe('endpoints', () => {
     });
   });
   /* ------- DELETE STUDENT BY ID ENDPOINTS ------- */
-  xdescribe('DELETE /student/:student_id', () => {
+  describe('DELETE /student/:student_id', () => {
     test('status 204: student deleted', () => {
-      return request(app).delete('/api/student/1').expect(204);
+      return request(app).delete('/api/students/1').expect(204);
     });
     test('status 400: invalid student_id', () => {
       return request(app)
-        .delete('/api/student/not-a-number')
+        .delete('/api/students/not-a-number')
         .expect(400)
         .then(({ body }) => {
           expect(body.msg).toBe('Bad request');
@@ -564,7 +564,7 @@ describe('endpoints', () => {
     });
     test('status 404: valid but non existent id', () => {
       return request(app)
-        .delete('/api/student/7777')
+        .delete('/api/students/7777')
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe('id not found');

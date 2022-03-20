@@ -11,6 +11,7 @@ const {
   postNewStudent,
   getStudentById,
   patchStudentById,
+  deleteStudentById,
 } = require('./controllers/student.controllers');
 const { invalidPath, psqlErrors, customErrors } = require('./errors/errors');
 
@@ -29,6 +30,7 @@ app.get('/api/students', getStudents);
 app.post('/api/students', postNewStudent);
 app.get('/api/students/:student_id', getStudentById);
 app.patch('/api/students/:student_id', patchStudentById);
+app.delete('/api/students/:student_id', deleteStudentById);
 
 app.all('/*', invalidPath);
 

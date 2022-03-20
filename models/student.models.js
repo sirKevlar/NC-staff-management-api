@@ -51,5 +51,18 @@ exports.updateStudentById = ({ body, params: { student_id } }) => {
       } = $1 WHERE student_id = $2 RETURNING *;`,
       [Object.values(body)[0], student_id]
     )
-    .then(({ rows }) => rows[0])
+    .then(({ rows }) => rows[0]);
+};
+
+exports.removeStudentById = ({ student_id }) => {
+  return db
+    .query(`DELETE FROM students WHERE student_id = $1 RETURNING *;`, [
+      student_id,
+    ])
+    .then(({ rows }) => {
+      if (rows.length === 0) {
+        return Promise.reject({ status: 404, msg: 'id not found' });
+      }
+      return rows[0];
+    });
 };

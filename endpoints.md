@@ -46,7 +46,7 @@ fetch array of staff objects by mentor group -->
 fetch individual student object by id ✅
 
 `PATCH /students/:student_id`
-append existing individual student object by id
+append existing individual student object by id ✅
 
 `DELETE /students/:student_id`
 delete existing individual student object by id
@@ -85,8 +85,8 @@ post a new pdp scheme object
 `GET /pdp.schemes/:scheme_id`
 fetch individual scheme object by id
 
-`GET /event.history`
-fetch array of event history objects
+`PATCH /pdp.schemes/:scheme_id`
+append existing pdp.scheme object by id
 
 `POST /event.history`
 post a new event object
