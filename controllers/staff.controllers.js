@@ -3,6 +3,7 @@ const {
   insertNewStaff,
   selectStaffById,
   updateStaffById,
+  removeStaffById,
 } = require('../models/staff.models');
 
 exports.getStaff = (req, res, next) => {
@@ -33,6 +34,14 @@ exports.patchStaffById = (req, res, next) => {
   updateStaffById(req)
     .then((employee) => {
       res.status(200).send({ employee });
+    })
+    .catch(next);
+};
+
+exports.deleteStaffById = (req, res, next) => {
+  removeStaffById(req.params)
+    .then((deletedEmployee) => {
+      res.status(204).send({ deletedEmployee });
     })
     .catch(next);
 };

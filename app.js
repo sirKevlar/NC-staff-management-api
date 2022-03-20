@@ -4,6 +4,7 @@ const {
   postNewStaff,
   getStaffById,
   patchStaffById,
+  deleteStaffById,
 } = require('./controllers/staff.controllers');
 const { invalidPath, psqlErrors, customErrors } = require('./errors/errors');
 
@@ -16,6 +17,7 @@ app.get('/api/staff', getStaff);
 app.post('/api/staff', postNewStaff);
 app.get('/api/staff/:staff_id', getStaffById);
 app.patch('/api/staff/:staff_id', patchStaffById);
+app.delete('/api/staff/:staff_id', deleteStaffById)
 
 app.all('/*', invalidPath);
 
