@@ -521,4 +521,32 @@ describe('endpoints', () => {
         });
     });
   });
+  /* ------- PATCH STUDENT BY ID ENDPOINTS ------- */
+  describe('PATCH /student/:student_id', () => {
+    test('status 200: returns patched student object', () => {
+      return request(app)
+        .patch('/api/students/1')
+        .send({ student_name: 'jonathan smith' })
+        .expect(200)
+        .then(({ body: { student } }) => {
+          expect(student).toEqual(
+            expect.objectContaining({
+              student_id: 1,
+              student_name: 'jonathan smith',
+              cohort_name: 'september-2021',
+              notes: 'something interesting',
+            })
+          );
+        });
+    });
+    test('status 400: invalid key on patch body', () => {
+      return request(app)
+        .patch('/api/students/1')
+        .send({ invalid_key: 'jonathan smith' })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+  });
 });
