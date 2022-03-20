@@ -317,7 +317,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- PATCH STAFF BY ID ENDPOINTS ------- */
-  describe('PATCH /staff/:staff_id', () => {
+  xdescribe('PATCH /staff/:staff_id', () => {
     test('status 200: returns patched employee object', () => {
       return request(app)
         .patch('/api/staff/1')
@@ -363,7 +363,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- DELETE STAFF BY ID ENDPOINTS ------- */
-  describe('DELETE /staff/:staff_id', () => {
+  xdescribe('DELETE /staff/:staff_id', () => {
     test('status 204: employee deleted', () => {
       return request(app).delete('/api/staff/1').expect(204);
     });
@@ -381,6 +381,29 @@ describe('endpoints', () => {
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe('id not found');
+        });
+    });
+  });
+  /* -------------------------------
+   ------- STUDENT ENDPOINTS ------- 
+   ------------------------------- */
+  describe('GET /students', () => {
+    test('status 200: fetches array of student objects', () => {
+      return request(app)
+        .get('/api/students')
+        .expect(200)
+        .then(({ body: { students } }) => {
+          expect(students).toHaveLength(14);
+          students.forEach((staffMember) => {
+            expect.objectContaining({
+              student_id: expect.any(Number),
+              student_name: expect.any(String),
+              cohort_name: expect.any(String),
+              seminar_group_name: expect.any(String),
+              mentor_group_name: expect.any(String),
+              notes: expect.any(String),
+            });
+          });
         });
     });
   });
