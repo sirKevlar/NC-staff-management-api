@@ -2,6 +2,7 @@ const {
   selectStaff,
   insertNewStaff,
   selectStaffById,
+  updateStaffById,
 } = require('../models/staff.models');
 
 exports.getStaff = (req, res, next) => {
@@ -22,6 +23,14 @@ exports.postNewStaff = (req, res, next) => {
 
 exports.getStaffById = (req, res, next) => {
   selectStaffById(req.params)
+    .then((employee) => {
+      res.status(200).send({ employee });
+    })
+    .catch(next);
+};
+
+exports.patchStaffById = (req, res, next) => {
+  updateStaffById(req)
     .then((employee) => {
       res.status(200).send({ employee });
     })

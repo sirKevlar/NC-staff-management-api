@@ -19,8 +19,9 @@ describe('endpoints', () => {
         });
     });
   });
-
-  /* ------- STAFF ENDPOINTS ------- */
+  /* -------------------------------
+   ------- STAFF ENDPOINTS ------- 
+   ------------------------------- */
   xdescribe('GET /staff', () => {
     test('status 200: fetches array of staff objects', () => {
       return request(app)
@@ -344,7 +345,7 @@ describe('endpoints', () => {
     });
     test('status 400: invalid value on patch body', () => {
       return request(app)
-      .patch('/api/staff/1')
+        .patch('/api/staff/1')
         .send({ holidays_left: 'not-a-number' })
         .expect(400)
         .then(({ body }) => {
@@ -353,7 +354,7 @@ describe('endpoints', () => {
     });
     test('status 400: invalid key on patch body', () => {
       return request(app)
-      .patch('/api/staff/1')
+        .patch('/api/staff/1')
         .send({ invalid_key: 15 })
         .expect(400)
         .then(({ body }) => {

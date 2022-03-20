@@ -90,3 +90,31 @@ exports.selectStaffById = ({ staff_id }) => {
       return rows[0];
     });
 };
+
+exports.updateStaffById = ({ body, params: { staff_id } }) => {
+  const bodyKeyGreenList = [
+    'employee_name',
+    'role',
+    'campus',
+    'team',
+    'start_date',
+    'event_id',
+    'holidays_left',
+    'absences',
+    'pdp_scheme',
+    'computer_serial',
+    'fob_serial',
+    'notes',
+  ];
+  if (!bodyKeyGreenList.includes(Object.keys(body)[0])) {
+    return Promise.reject({ status: 400, msg: 'Bad request' });
+  }
+  return db
+    .query(
+      `UPDATE staff SET ${
+        Object.keys(body)[0]
+      } = $1 WHERE staff_id = $2 RETURNING *`,
+      [Object.values(body)[0], staff_id]
+    )
+    .then(({ rows }) => rows[0]);
+};
