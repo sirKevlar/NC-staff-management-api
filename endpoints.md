@@ -25,10 +25,7 @@ fetch individual staff object by id ✅
 append existing individual staff object by id ✅
 
 `DELETE /staff/:staff_id`
-delete existing individual staff object by id
-
-`GET /staff/:staff_id/students`
-fetch array of students by staff_id
+delete existing individual staff object by id ✅
 
 `GET /students`
 fetch array of student objects
