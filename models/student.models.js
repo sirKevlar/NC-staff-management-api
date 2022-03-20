@@ -26,3 +26,14 @@ exports.insertNewStudent = ({ student_name, cohort_name, notes }) => {
     )
     .then(({ rows }) => rows[0]);
 };
+
+exports.selectStudentById = ({ student_id }) => {
+  return db
+    .query(`SELECT * FROM students WHERE student_id = $1`, [student_id])
+    .then(({ rows }) => {
+      if (rows.length === 0) {
+        return Promise.reject({ status: 404, msg: 'id not found' });
+      }
+      return rows[0];
+    });
+};

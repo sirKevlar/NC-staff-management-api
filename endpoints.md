@@ -34,7 +34,7 @@ fetch array of student objects ✅
 post a new student object ✅
 
 `GET /students?cohort=:cohort`
-fetch array of student objects filtered by cohort
+fetch array of student objects filtered by cohort ✅
 
 <!-- `GET /students/:seminar_group` **turn into queries on students**
 fetch array of staff objects by seminar group
@@ -84,9 +84,6 @@ post a new pdp scheme object
 
 `GET /pdp.schemes/:scheme_id`
 fetch individual scheme object by id
-
-`DELETE /pdp.schemes/:scheme_id`
-delete individual scheme object by id
 
 `GET /event.history`
 fetch array of event history objects
