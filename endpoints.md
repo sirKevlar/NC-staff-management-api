@@ -49,7 +49,7 @@ fetch individual student object by id ✅
 append existing individual student object by id ✅
 
 `DELETE /students/:student_id`
-delete existing individual student object by id
+delete existing individual student object by id ✅
 
 `GET /cohorts`
 fetch array of cohort objects

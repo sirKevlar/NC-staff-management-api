@@ -550,7 +550,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- DELETE STUDENT BY ID ENDPOINTS ------- */
-  describe('DELETE /student/:student_id', () => {
+  xdescribe('DELETE /student/:student_id', () => {
     test('status 204: student deleted', () => {
       return request(app).delete('/api/students/1').expect(204);
     });
@@ -568,6 +568,30 @@ describe('endpoints', () => {
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe('id not found');
+        });
+    });
+  });
+  /* -------------------------------
+   ------- COHORTS ENDPOINTS ------- 
+   ------------------------------- */
+  describe('GET /cohorts', () => {
+    test('status 200: fetches array of cohort objects', () => {
+      return request(app)
+        .get('/api/cohorts')
+        .expect(200)
+        .then(({ body: { cohorts } }) => {
+          expect(cohorts).toHaveLength(4);
+          cohorts.forEach((staffMember) => {
+            expect.objectContaining({
+              cohort_name: expect.any(String),
+              status: expect.any(String),
+              type: expect.any(String),
+              student_count: expect.any(Number),
+              start_date: expect.any(String),
+              end_date: expect.any(String),
+              percent_in_work: expect.any(Number),
+            });
+          });
         });
     });
   });
