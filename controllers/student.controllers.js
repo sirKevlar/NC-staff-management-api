@@ -4,7 +4,7 @@ const {
 } = require('../models/student.models');
 
 exports.getStudents = (req, res, next) => {
-  selectStudents()
+  selectStudents(req.query)
     .then((students) => {
       res.status(200).send({ students });
     })

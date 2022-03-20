@@ -1,17 +1,20 @@
 const { location } = require('express/lib/response');
 const db = require('../db');
 
-exports.selectStudents = () => {
+exports.selectStudents = ({ cohort }) => {
   let queryStr = `SELECT * FROM students`;
 
-  return db.query(queryStr).then(({ rows }) => rows);
+  if (cohort) queryStr += ` WHERE cohort_name = $1`;
+
+  return db.query(queryStr, [cohort]).then(({ rows }) => {
+    if (rows.length === 0) {
+      return Promise.reject({ status: 404, msg: 'filter value not found' });
+    }
+    return rows;
+  });
 };
 
-exports.insertNewStudent = ({
-  student_name,
-  cohort_name,
-  notes,
-}) => {
+exports.insertNewStudent = ({ student_name, cohort_name, notes }) => {
   return db
     .query(
       `

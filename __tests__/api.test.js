@@ -457,7 +457,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET STUDENTS QUERIES ENDPOINTS ------- */
-  describe('GET /students queries', () => {
+  xdescribe('GET /students queries', () => {
     test('status 200: query to filter by cohort', () => {
       return request(app)
         .get('/api/students?cohort=september-2021')
