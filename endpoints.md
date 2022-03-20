@@ -28,7 +28,7 @@ append existing individual staff object by id ✅
 delete existing individual staff object by id ✅
 
 `GET /students`
-fetch array of student objects
+fetch array of student objects ✅
 
 `POST /students`
 post a new student object
@@ -41,6 +41,9 @@ fetch array of staff objects by seminar group
 
 `GET /students/:mentor_group` **turn into queries on students**
 fetch array of staff objects by mentor group -->
+
+`GET /student/:student_id`
+fetch individual student object by id
 
 `PATCH /students/:student_id`
 append existing individual student object by id

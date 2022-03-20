@@ -77,7 +77,7 @@ exports.insertNewStaff = ({
         notes,
       ]
     )
-    .then(({ rows }) => rows);
+    .then(({ rows }) => rows[0]);
 };
 
 exports.selectStaffById = ({ staff_id }) => {

@@ -6,7 +6,10 @@ const {
   patchStaffById,
   deleteStaffById,
 } = require('./controllers/staff.controllers');
-const { getStudents } = require('./controllers/student.controllers');
+const {
+  getStudents,
+  postNewStudent,
+} = require('./controllers/student.controllers');
 const { invalidPath, psqlErrors, customErrors } = require('./errors/errors');
 
 const app = express();
@@ -21,6 +24,7 @@ app.patch('/api/staff/:staff_id', patchStaffById);
 app.delete('/api/staff/:staff_id', deleteStaffById);
 
 app.get('/api/students', getStudents);
+app.post('/api/students', postNewStudent);
 
 app.all('/*', invalidPath);
 

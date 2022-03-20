@@ -414,20 +414,16 @@ describe('endpoints', () => {
         .post('/api/students')
         .send({
           student_name: 'jespen haarne',
-          cohort_name: 'march-2022',
-          seminar_group_name: 'seminar-1_march-2022',
-          mentor_group_name: 'mentor-1_seminar-2_march-2022',
+          cohort_name: 'january-2022',
           notes: 'something interesting',
         })
         .expect(201)
-        .then(({ body: { student } }) => {
-          expect(student).toEqual(
+        .then(({ body: { newStudent } }) => {
+          expect(newStudent).toEqual(
             expect.objectContaining({
               student_id: 15,
               student_name: 'jespen haarne',
-              cohort_name: 'march-2022',
-              seminar_group_name: 'seminar-1_march-2022',
-              mentor_group_name: 'mentor-1_seminar-2_march-2022',
+              cohort_name: 'january-2022',
               notes: 'something interesting',
             })
           );
@@ -438,9 +434,7 @@ describe('endpoints', () => {
         .post('/api/students')
         .send({
           invalid_key: 'jespen haarne',
-          cohort_name: 'march-2022',
-          seminar_group_name: 'seminar-1_march-2022',
-          mentor_group_name: 'mentor-1_seminar-2_march-2022',
+          cohort_name: 'january-2022',
           notes: 'something interesting',
         })
         .expect(400)
@@ -453,9 +447,7 @@ describe('endpoints', () => {
         .post('/api/students')
         .send({
           student_name: null,
-          cohort_name: 'march-2022',
-          seminar_group_name: 'seminar-1_march-2022',
-          mentor_group_name: 'mentor-1_seminar-2_march-2022',
+          cohort_name: 'january-2022',
           notes: 'something interesting',
         })
         .expect(400)
