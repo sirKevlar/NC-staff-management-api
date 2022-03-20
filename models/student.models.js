@@ -37,3 +37,19 @@ exports.selectStudentById = ({ student_id }) => {
       return rows[0];
     });
 };
+
+exports.updateStudentById = ({ body, params: { student_id } }) => {
+  const bodyKeyGreenList = ['student_name', 'cohort_name', 'notes'];
+
+  if (!bodyKeyGreenList.includes(Object.keys(body)[0])) {
+    return Promise.reject({ status: 400, msg: 'Bad request' });
+  }
+  return db
+    .query(
+      `UPDATE students SET ${
+        Object.keys(body)[0]
+      } = $1 WHERE student_id = $2 RETURNING *;`,
+      [Object.values(body)[0], student_id]
+    )
+    .then(({ rows }) => rows[0])
+};

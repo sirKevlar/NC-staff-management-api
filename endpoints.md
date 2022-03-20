@@ -43,7 +43,7 @@ fetch array of staff objects by seminar group
 fetch array of staff objects by mentor group -->
 
 `GET /student/:student_id`
-fetch individual student object by id
+fetch individual student object by id ✅
 
 `PATCH /students/:student_id`
 append existing individual student object by id

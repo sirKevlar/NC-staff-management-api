@@ -488,7 +488,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET STUDENT BY ID ENDPOINTS ------- */
-  describe('GET /student/:student_id', () => {
+  xdescribe('GET /student/:student_id', () => {
     test('status 200: fetches single student object', () => {
       return request(app)
         .get('/api/students/1')
@@ -522,7 +522,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- PATCH STUDENT BY ID ENDPOINTS ------- */
-  describe('PATCH /student/:student_id', () => {
+  xdescribe('PATCH /student/:student_id', () => {
     test('status 200: returns patched student object', () => {
       return request(app)
         .patch('/api/students/1')

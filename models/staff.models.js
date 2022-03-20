@@ -83,12 +83,7 @@ exports.insertNewStaff = ({
 exports.selectStaffById = ({ staff_id }) => {
   return db
     .query(`SELECT * FROM staff WHERE staff_id = $1`, [staff_id])
-    .then(({ rows }) => {
-      if (rows.length === 0) {
-        return Promise.reject({ status: 404, msg: 'id not found' });
-      }
-      return rows[0];
-    });
+    .then 
 };
 
 exports.updateStaffById = ({ body, params: { staff_id } }) => {

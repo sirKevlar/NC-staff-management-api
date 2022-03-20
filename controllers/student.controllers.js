@@ -2,6 +2,7 @@ const {
   selectStudents,
   insertNewStudent,
   selectStudentById,
+  updateStudentById,
 } = require('../models/student.models');
 
 exports.getStudents = (req, res, next) => {
@@ -22,6 +23,14 @@ exports.postNewStudent = (req, res, next) => {
 
 exports.getStudentById = (req, res, next) => {
   selectStudentById(req.params)
+    .then((student) => {
+      res.status(200).send({ student });
+    })
+    .catch(next);
+};
+
+exports.patchStudentById = (req, res, next) => {
+  updateStudentById(req)
     .then((student) => {
       res.status(200).send({ student });
     })
