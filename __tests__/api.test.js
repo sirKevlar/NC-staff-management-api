@@ -596,7 +596,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- POST COHORT ENDPOINTS ------- */
-  describe('POST /cohorts', () => {
+  xdescribe('POST /cohorts', () => {
     test('status 201: cohort created', () => {
       return request(app)
         .post('/api/cohorts')
@@ -656,6 +656,43 @@ describe('endpoints', () => {
         .expect(400)
         .then(({ body }) => {
           expect(body.msg).toBe('Bad request');
+        });
+    });
+  });
+  /* ------- GET COHORT BY ID ENDPOINTS ------- */
+  describe('GET /cohort/:cohort_id', () => {
+    test('status 200: fetches single cohort object', () => {
+      return request(app)
+        .get('/api/cohorts/january-2022')
+        .expect(200)
+        .then(({ body: { cohort } }) => {
+          expect(cohort).toEqual(
+            expect.objectContaining({
+              cohort_name: 'january-2022',
+              status: 'in progress',
+              type: 'full-stack boot camp',
+              student_count: 105,
+              start_date: '2022-01-04',
+              end_date: '2022-04-10',
+              percent_in_work: 0,
+            })
+          );
+        });
+    });
+    test('status 400: invalid cohort_id', () => {
+      return request(app)
+        .get('/api/cohorts/not-a-number')
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+    test('status 404: valid but non existent id', () => {
+      return request(app)
+        .get('/api/cohorts/7777')
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe('id not found');
         });
     });
   });
