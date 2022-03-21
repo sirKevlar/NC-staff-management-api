@@ -660,7 +660,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET COHORT BY ID ENDPOINTS ------- */
-  describe('GET /cohort/:cohort_id', () => {
+  describe('GET /cohort/:cohort_name', () => {
     test('status 200: fetches single cohort object', () => {
       return request(app)
         .get('/api/cohorts/january-2022')
@@ -677,14 +677,6 @@ describe('endpoints', () => {
               percent_in_work: 0,
             })
           );
-        });
-    });
-    test('status 400: invalid cohort_id', () => {
-      return request(app)
-        .get('/api/cohorts/not-a-number')
-        .expect(400)
-        .then(({ body }) => {
-          expect(body.msg).toBe('Bad request');
         });
     });
     test('status 404: valid but non existent id', () => {

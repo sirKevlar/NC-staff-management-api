@@ -55,11 +55,11 @@ delete existing individual student object by id ✅
 fetch array of cohort objects ✅
 
 `POST /cohorts`
-post a new cohort object
+post a new cohort object ✅
 
 fetch individual cohort object by id
 `GET /cohorts/:cohort_id`
-**basic cohort deets number of students/dates etc**
+**basic cohort details: number of students/dates etc**
 
 `PATCH /cohorts/:cohort_id`
 append existing individual cohort object by id

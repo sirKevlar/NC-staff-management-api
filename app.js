@@ -2,6 +2,7 @@ const express = require('express');
 const {
   getCohorts,
   postNewCohort,
+  getCohortById,
 } = require('./controllers/cohort.controllers');
 const {
   getStaff,
@@ -38,6 +39,7 @@ app.delete('/api/students/:student_id', deleteStudentById);
 
 app.get('/api/cohorts', getCohorts);
 app.post('/api/cohorts', postNewCohort);
+app.get('/api/cohorts/:cohort_name', getCohortById);
 
 app.all('/*', invalidPath);
 

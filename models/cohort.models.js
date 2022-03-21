@@ -32,3 +32,14 @@ exports.insertNewCohort = ({
     )
     .then(({ rows }) => rows[0]);
 };
+
+exports.selectCohortById = ({ cohort_name }) => {
+  return db
+    .query(`SELECT * FROM cohorts WHERE cohort_name = $1`, [cohort_name])
+    .then(({ rows }) => {
+      if (rows.length === 0) {
+        return Promise.reject({ status: 404, msg: 'id not found' });
+      }
+      return rows[0];
+    });
+};
