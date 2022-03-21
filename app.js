@@ -5,7 +5,11 @@ const {
   getCohortById,
   patchCohortById,
 } = require('./controllers/cohort.controllers');
-const { getPdps, postNewPdp } = require('./controllers/pdp.controllers');
+const {
+  getPdps,
+  postNewPdp,
+  getPdpById,
+} = require('./controllers/pdp.controllers');
 const {
   getStaff,
   postNewStaff,
@@ -46,6 +50,7 @@ app.patch('/api/cohorts/:cohort_name', patchCohortById);
 
 app.get('/api/pdps', getPdps);
 app.post('/api/pdps', postNewPdp);
+app.get('/api/pdps/:pdp_scheme', getPdpById);
 
 app.all('/*', invalidPath);
 

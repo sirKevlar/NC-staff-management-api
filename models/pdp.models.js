@@ -16,3 +16,14 @@ exports.insertNewPdp = ({ pdp_scheme, details, duration_in_days, url }) => {
     )
     .then(({ rows }) => rows[0]);
 };
+
+exports.selectPdpById = ({ pdp_scheme }) => {
+    return db
+      .query(`SELECT * FROM pdps WHERE pdp_scheme = $1`, [pdp_scheme])
+      .then(({ rows }) => {
+        if (rows.length === 0) {
+          return Promise.reject({ status: 404, msg: 'id not found' });
+        }
+        return rows[0];
+      });
+  };

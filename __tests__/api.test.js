@@ -750,7 +750,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- POST PDP ENDPOINTS ------- */
-  describe('POST /pdps', () => {
+  xdescribe('POST /pdps', () => {
     test('status 201: pdp created', () => {
       return request(app)
         .post('/api/pdps')
@@ -802,7 +802,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET PDP BY ID ENDPOINTS ------- */
-  xdescribe('GET /pdp/:pdp_scheme', () => {
+  describe('GET /pdp/:pdp_scheme', () => {
     test('status 200: fetches single pdp object', () => {
       return request(app)
         .get('/api/pdps/Flutter-course')

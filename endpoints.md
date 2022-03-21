@@ -80,7 +80,7 @@ post a new seminar group object -->
 fetch array of pdp scheme objects ✅
 
 `POST /pdp.schemes`
-post a new pdp scheme object
+post a new pdp scheme object ✅
 
 `GET /pdp.schemes/:scheme_id`
 fetch individual scheme object by id
