@@ -77,7 +77,7 @@ fetch array of seminar objects
 post a new seminar group object -->
 
 `GET /pdp.schemes`
-fetch array of pdp scheme objects
+fetch array of pdp scheme objects ✅
 
 `POST /pdp.schemes`
 post a new pdp scheme object

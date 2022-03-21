@@ -731,7 +731,7 @@ describe('endpoints', () => {
   /* -------------------------------
    ------- PDP SCHEME ENDPOINTS ------- 
    ------------------------------- */
-  describe('GET /pdps', () => {
+  xdescribe('GET /pdps', () => {
     test('status 200: fetches array of pdp_scheme objects', () => {
       return request(app)
         .get('/api/pdps')
@@ -750,7 +750,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- POST PDP ENDPOINTS ------- */
-  xdescribe('POST /pdps', () => {
+  describe('POST /pdps', () => {
     test('status 201: pdp created', () => {
       return request(app)
         .post('/api/pdps')

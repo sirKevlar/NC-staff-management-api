@@ -1,4 +1,4 @@
-const { selectPdps } = require('../models/pdp.models');
+const { selectPdps, insertNewPdp } = require('../models/pdp.models');
 
 exports.getPdps = (req, res, next) => {
   selectPdps()
@@ -7,3 +7,11 @@ exports.getPdps = (req, res, next) => {
     })
     .catch(next);
 };
+
+exports.postNewPdp = (req, res, next) => {
+    insertNewPdp(req.body)
+      .then((newPdp) => {
+        res.status(201).send({ newPdp });
+      })
+      .catch(next);
+  };
