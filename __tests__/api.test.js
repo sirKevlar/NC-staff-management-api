@@ -660,7 +660,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET COHORT BY ID ENDPOINTS ------- */
-  describe('GET /cohort/:cohort_name', () => {
+  xdescribe('GET /cohort/:cohort_name', () => {
     test('status 200: fetches single cohort object', () => {
       return request(app)
         .get('/api/cohorts/january-2022')
@@ -685,6 +685,46 @@ describe('endpoints', () => {
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe('id not found');
+        });
+    });
+  });
+  /* ------- PATCH COHORT BY ID ENDPOINTS ------- */
+  describe('PATCH /cohort/:cohort_name', () => {
+    test('status 200: returns patched cohort object', () => {
+      return request(app)
+        .patch('/api/cohorts/january-2022')
+        .send({ percent_in_work: 15 })
+        .expect(200)
+        .then(({ body: { cohort } }) => {
+          expect(cohort).toEqual(
+            expect.objectContaining({
+              cohort_name: 'january-2022',
+              status: 'in progress',
+              type: 'full-stack boot camp',
+              student_count: 105,
+              start_date: '2022-01-04',
+              end_date: '2022-04-10',
+              percent_in_work: 15,
+            })
+          );
+        });
+    });
+    test('status 400: invalid value on patch body', () => {
+      return request(app)
+        .patch('/api/cohorts/january-2022')
+        .send({ percent_in_work: 'not-a-number' })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+    test('status 400: invalid key on patch body', () => {
+      return request(app)
+        .patch('/api/cohorts/january-2022')
+        .send({ invalid_key: 15 })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
         });
     });
   });
