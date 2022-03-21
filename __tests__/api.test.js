@@ -802,7 +802,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET PDP BY ID ENDPOINTS ------- */
-  describe('GET /pdp/:pdp_scheme', () => {
+  xdescribe('GET /pdp/:pdp_scheme', () => {
     test('status 200: fetches single pdp object', () => {
       return request(app)
         .get('/api/pdps/Flutter-course')
@@ -825,6 +825,44 @@ describe('endpoints', () => {
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe('id not found');
+        });
+    });
+  });
+  /* ------- PATCH PDP BY ID ENDPOINTS ------- */
+  describe('PATCH /pdps/:pdp_scheme', () => {
+    test('status 200: returns patched pdp object', () => {
+      return request(app)
+        .patch('/api/pdps/Flutter-course')
+        .send({ duration_in_days: 30 })
+        .expect(200)
+        .then(({ body: { pdp } }) => {
+          expect(pdp).toEqual(
+            expect.objectContaining({
+              pdp_scheme: 'Flutter-course',
+              details:
+                "Burrow under covers, mew mew lick butt. Love blinks and purr purr purr purr yawn poop on the floor, break a planter, sprint, eat own hair, vomit hair, hiss, chirp at birds, eat a squirrel, hide from fireworks, lick toe beans, attack christmas tree or stare at owner accusingly then wink or sleep nap get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over or cat cat moo moo lick ears lick paws so have a lot of grump in yourself because you can't forget to be grumpy and not be like king grumpy cat. Sleep nap sleep on keyboard trip owner up in kitchen i want food human is in bath tub, emergency! drowning! meooowww!. Cat cat moo moo lick ears lick paws mark territory, for run in circles meow in empty rooms give me attention or face the wrath of my claws yet let me in let me out let me in let me out let me in let me out who broke this door anyway . Sleep everywhere, but not in my bed slap kitten brother with paw for swipe at owner's legs. I bet my nine lives on you-oooo-ooo-hooo cats woo so scratch the furniture nap all day get my claw stuck in the dog's ear for meowing chowing and wowing and attack dog, run away and pretend to be victim. When owners are asleep, cry for no apparent reason it's 3am, time to create some chaos howl uncontrollably for no reason but sweet beast, but rub my belly hiss.",
+              duration_in_days: 30,
+              url: 'www.popup-hell.com',
+            })
+          );
+        });
+    });
+    test('status 400: invalid value on patch body', () => {
+      return request(app)
+        .patch('/api/pdps/Flutter-course')
+        .send({ duration_in_days: 'not-a-number' })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+    test('status 400: invalid key on patch body', () => {
+      return request(app)
+        .patch('/api/pdps/Flutter-course')
+        .send({ invalid_key: 15 })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
         });
     });
   });
