@@ -83,7 +83,7 @@ fetch array of pdp scheme objects ✅
 post a new pdp scheme object ✅
 
 `GET /pdp.schemes/:scheme_id`
-fetch individual scheme object by id
+fetch individual scheme object by id ✅
 
 `PATCH /pdp.schemes/:scheme_id`
 append existing pdp.scheme object by id
