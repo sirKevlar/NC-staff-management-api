@@ -829,7 +829,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- PATCH PDP BY ID ENDPOINTS ------- */
-  describe('PATCH /pdps/:pdp_scheme', () => {
+  xdescribe('PATCH /pdps/:pdp_scheme', () => {
     test('status 200: returns patched pdp object', () => {
       return request(app)
         .patch('/api/pdps/Flutter-course')
@@ -867,7 +867,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- POST EVENTS ENDPOINTS ------- */
-  describe('POST /events', () => {
+  xdescribe('POST /events', () => {
     test('status 201: event created', () => {
       return request(app)
         .post('/api/events')

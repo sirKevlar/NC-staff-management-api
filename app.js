@@ -5,6 +5,7 @@ const {
   getCohortById,
   patchCohortById,
 } = require('./controllers/cohort.controllers');
+const { postNewEvent } = require('./controllers/events.controllers');
 const {
   getPdps,
   postNewPdp,
@@ -53,6 +54,8 @@ app.get('/api/pdps', getPdps);
 app.post('/api/pdps', postNewPdp);
 app.get('/api/pdps/:pdp_scheme', getPdpById);
 app.patch('/api/pdps/:pdp_scheme', patchPdpById);
+
+app.post('/api/events', postNewEvent);
 
 app.all('/*', invalidPath);
 

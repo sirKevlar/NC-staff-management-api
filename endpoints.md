@@ -86,9 +86,9 @@ post a new pdp scheme object ✅
 fetch individual scheme object by id ✅
 
 `PATCH /pdp.schemes/:scheme_id`
-append existing pdp.scheme object by id
+append existing pdp.scheme object by id ✅
 
-`POST /event.history`
+`POST /events`
 post a new event object
 
 **Do we need endpoints for getting all the staff associated with a student? YES**
