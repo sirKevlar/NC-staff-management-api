@@ -728,4 +728,25 @@ describe('endpoints', () => {
         });
     });
   });
+  /* -------------------------------
+   ------- PDP SCHEME ENDPOINTS ------- 
+   ------------------------------- */
+  xdescribe('GET /pdp_schemes', () => {
+    test('status 200: fetches array of pdp_scheme objects', () => {
+      return request(app)
+        .get('/api/pdp_schemes')
+        .expect(200)
+        .then(({ body: { pdp_schemes } }) => {
+          expect(pdp_schemes).toHaveLength(3);
+          cohorts.forEach((staffMember) => {
+            expect.objectContaining({
+              pdp_scheme: expect.any(String),
+              details: expect.any(String),
+              duration_in_days: expect.any(Number),
+              url: expect.any(String),
+            });
+          });
+        });
+    });
+  });
 });
