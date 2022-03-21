@@ -2,6 +2,7 @@ const {
   selectCohorts,
   insertNewCohort,
   selectCohortById,
+  updateCohortById,
 } = require('../models/cohort.models');
 
 exports.getCohorts = (req, res, next) => {
@@ -22,6 +23,14 @@ exports.postNewCohort = (req, res, next) => {
 
 exports.getCohortById = (req, res, next) => {
   selectCohortById(req.params)
+    .then((cohort) => {
+      res.status(200).send({ cohort });
+    })
+    .catch(next);
+};
+
+exports.patchCohortById = (req, res, next) => {
+  updateCohortById(req)
     .then((cohort) => {
       res.status(200).send({ cohort });
     })

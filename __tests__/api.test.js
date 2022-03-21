@@ -689,7 +689,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- PATCH COHORT BY ID ENDPOINTS ------- */
-  describe('PATCH /cohort/:cohort_name', () => {
+  xdescribe('PATCH /cohort/:cohort_name', () => {
     test('status 200: returns patched cohort object', () => {
       return request(app)
         .patch('/api/cohorts/january-2022')

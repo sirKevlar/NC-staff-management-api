@@ -57,12 +57,12 @@ fetch array of cohort objects ✅
 `POST /cohorts`
 post a new cohort object ✅
 
-fetch individual cohort object by id
-`GET /cohorts/:cohort_id`
+`GET /cohorts/:cohort_name`
+fetch individual cohort object by id ✅
 **basic cohort details: number of students/dates etc**
 
-`PATCH /cohorts/:cohort_id`
-append existing individual cohort object by id
+`PATCH /cohorts/:cohort_name`
+append existing individual cohort object by id 
 
 <!-- `GET /seminar.groups`
 fetch array of seminar objects

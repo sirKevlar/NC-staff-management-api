@@ -43,3 +43,26 @@ exports.selectCohortById = ({ cohort_name }) => {
       return rows[0];
     });
 };
+
+exports.updateCohortById = ({ body, params: { cohort_name } }) => {
+  const bodyKeyGreenList = [
+    'cohort_name',
+    'status',
+    'type',
+    'student_count',
+    'start_date',
+    'end_date',
+    'percent_in_work',
+  ];
+  if (!bodyKeyGreenList.includes(Object.keys(body)[0])) {
+    return Promise.reject({ status: 400, msg: 'Bad request' });
+  }
+  return db
+    .query(
+      `UPDATE cohorts SET ${
+        Object.keys(body)[0]
+      } = $1 WHERE cohort_name = $2 RETURNING *`,
+      [Object.values(body)[0], cohort_name]
+    )
+    .then(({ rows }) => rows[0]);
+};
