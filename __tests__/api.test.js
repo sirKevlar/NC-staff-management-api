@@ -866,4 +866,42 @@ describe('endpoints', () => {
         });
     });
   });
+  /* ------- POST EVENTS ENDPOINTS ------- */
+  describe('POST /events', () => {
+    test('status 201: event created', () => {
+      return request(app)
+        .post('/api/events')
+        .send({
+          employee_name: 'kev morel',
+          start_date: '2022-02-20',
+          end_date: '2022-03-20',
+          cohort: 'january-2022',
+        })
+        .expect(201)
+        .then(({ body: { newEvent } }) => {
+          expect(newEvent).toEqual(
+            expect.objectContaining({
+              employee_name: 'kev morel',
+              start_date: '2022-02-20',
+              end_date: '2022-03-20',
+              cohort: 'january-2022',
+            })
+          );
+        });
+    });
+    test('status 400: invalid body key', () => {
+      return request(app)
+        .post('/api/events')
+        .send({
+          invalid_key: 'kev morel',
+          start_date: '2022-02-20',
+          end_date: '2022-03-20',
+          cohort: 'january-2022',
+        })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+  });
 });
