@@ -581,7 +581,7 @@ describe('endpoints', () => {
         .expect(200)
         .then(({ body: { cohorts } }) => {
           expect(cohorts).toHaveLength(4);
-          cohorts.forEach((staffMember) => {
+          cohorts.forEach((cohort) => {
             expect.objectContaining({
               cohort_name: expect.any(String),
               status: expect.any(String),
@@ -731,14 +731,14 @@ describe('endpoints', () => {
   /* -------------------------------
    ------- PDP SCHEME ENDPOINTS ------- 
    ------------------------------- */
-  xdescribe('GET /pdp_schemes', () => {
+  describe('GET /pdps', () => {
     test('status 200: fetches array of pdp_scheme objects', () => {
       return request(app)
-        .get('/api/pdp_schemes')
+        .get('/api/pdps')
         .expect(200)
-        .then(({ body: { pdp_schemes } }) => {
-          expect(pdp_schemes).toHaveLength(3);
-          cohorts.forEach((staffMember) => {
+        .then(({ body: { pdps } }) => {
+          expect(pdps).toHaveLength(3);
+          pdps.forEach((pdp) => {
             expect.objectContaining({
               pdp_scheme: expect.any(String),
               details: expect.any(String),

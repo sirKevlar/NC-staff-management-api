@@ -62,7 +62,7 @@ fetch individual cohort object by id ✅
 **basic cohort details: number of students/dates etc**
 
 `PATCH /cohorts/:cohort_name`
-append existing individual cohort object by id 
+append existing individual cohort object by id ✅
 
 <!-- `GET /seminar.groups`
 fetch array of seminar objects
