@@ -1,5 +1,8 @@
 const express = require('express');
-const { getCohorts } = require('./controllers/cohort.controllers');
+const {
+  getCohorts,
+  postNewCohort,
+} = require('./controllers/cohort.controllers');
 const {
   getStaff,
   postNewStaff,
@@ -34,6 +37,7 @@ app.patch('/api/students/:student_id', patchStudentById);
 app.delete('/api/students/:student_id', deleteStudentById);
 
 app.get('/api/cohorts', getCohorts);
+app.post('/api/cohorts', postNewCohort);
 
 app.all('/*', invalidPath);
 

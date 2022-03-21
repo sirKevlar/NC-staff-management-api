@@ -574,7 +574,7 @@ describe('endpoints', () => {
   /* -------------------------------
    ------- COHORTS ENDPOINTS ------- 
    ------------------------------- */
-  describe('GET /cohorts', () => {
+  xdescribe('GET /cohorts', () => {
     test('status 200: fetches array of cohort objects', () => {
       return request(app)
         .get('/api/cohorts')
@@ -592,6 +592,70 @@ describe('endpoints', () => {
               percent_in_work: expect.any(Number),
             });
           });
+        });
+    });
+  });
+  /* ------- POST COHORT ENDPOINTS ------- */
+  describe('POST /cohorts', () => {
+    test('status 201: cohort created', () => {
+      return request(app)
+        .post('/api/cohorts')
+        .send({
+          cohort_name: 'march-2022',
+          status: 'in progress',
+          type: 'full-stack boot camp',
+          student_count: 95,
+          start_date: '2022-03-04',
+          end_date: '2022-06-10',
+          percent_in_work: 0,
+        })
+        .expect(201)
+        .then(({ body: { newCohort } }) => {
+          expect(newCohort).toEqual(
+            expect.objectContaining({
+              cohort_name: 'march-2022',
+              status: 'in progress',
+              type: 'full-stack boot camp',
+              student_count: 95,
+              start_date: '2022-03-04',
+              end_date: '2022-06-10',
+              percent_in_work: 0,
+            })
+          );
+        });
+    });
+    test('status 400: invalid body key', () => {
+      return request(app)
+        .post('/api/cohorts')
+        .send({
+          invalid_key: 'march-2022',
+          status: 'in progress',
+          type: 'full-stack boot camp',
+          student_count: 95,
+          start_date: '2022-03-04',
+          end_date: '2022-06-10',
+          percent_in_work: 0,
+        })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+    test('status 400: invalid body value', () => {
+      return request(app)
+        .post('/api/cohorts')
+        .send({
+          invalid_key: 'march-2022',
+          status: 'in progress',
+          type: 'full-stack boot camp',
+          student_count: 'not-a-number',
+          start_date: '2022-03-04',
+          end_date: '2022-06-10',
+          percent_in_work: 0,
+        })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
         });
     });
   });

@@ -52,7 +52,7 @@ append existing individual student object by id ✅
 delete existing individual student object by id ✅
 
 `GET /cohorts`
-fetch array of cohort objects
+fetch array of cohort objects ✅
 
 `POST /cohorts`
 post a new cohort object
