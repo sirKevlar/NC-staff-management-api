@@ -749,4 +749,56 @@ describe('endpoints', () => {
         });
     });
   });
+  /* ------- POST PDP ENDPOINTS ------- */
+  xdescribe('POST /pdps', () => {
+    test('status 201: pdp created', () => {
+      return request(app)
+        .post('/api/pdps')
+        .send({
+          pdp_scheme: 'React-course',
+          details: 'This is where we would put some useful info',
+          duration_in_days: 180,
+          url: 'www.click-bait.com',
+        })
+        .expect(201)
+        .then(({ body: { newPdp } }) => {
+          expect(newPdp).toEqual(
+            expect.objectContaining({
+              pdp_scheme: 'React-course',
+              details: 'This is where we would put some useful info',
+              duration_in_days: 180,
+              url: 'www.click-bait.com',
+            })
+          );
+        });
+    });
+    test('status 400: invalid body key', () => {
+      return request(app)
+        .post('/api/pdps')
+        .send({
+          invalid_key: 'React-course',
+          details: 'This is where we would put some useful info',
+          duration_in_days: 180,
+          url: 'www.click-bait.com',
+        })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+    test('status 400: invalid body value', () => {
+      return request(app)
+        .post('/api/pdps')
+        .send({
+          pdp_scheme: 'React-course',
+          details: 'This is where we would put some useful info',
+          duration_in_days: 'not-a-number',
+          url: 'www.click-bait.com',
+        })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe('Bad request');
+        });
+    });
+  });
 });
