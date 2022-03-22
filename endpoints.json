@@ -1,0 +1,23 @@
+{ "available-endpoints" : {
+    "GET /staff" : "fetch array of staff objects",
+    "POST /staff" : "post a new staff object",
+    "GET /staff?:query=:queryValue" : "fetch array of staff objects filtered by: (currentCohort/role/campus/team/pdp_scheme/student)",
+    "GET /staff/:staff_id" : "fetch individual staff object by id",
+    "PATCH /staff/:staff_id" : "append existing individual staff object by id",
+    "DELETE /staff/:staff_id" : "delete existing individual staff object by id",
+    "GET /students" : "fetch array of student objects",
+    "POST /students" : "post a new student object",
+    "GET /students?cohort_name=:cohort_name" : "fetch array of student objects filtered by cohort",
+    "GET /student/:student_id" : "fetch individual student object by id",
+    "PATCH /students/:student_id" : "append existing individual student object by id",
+    "DELETE /students/:student_id" : "delete existing individual student object by id",
+    "GET /cohorts" : "fetch array of cohort objects",
+    "POST /cohorts" : "post a new cohort object",
+    "GET /cohorts/:cohort_name" : "fetch individual cohort object by id",
+    "PATCH /cohorts/:cohort_name" : "append existing individual cohort object by id",
+    "GET /pdp.schemes" : "fetch array of pdp scheme objects",
+    "POST /pdp.schemes" : "post a new pdp scheme object",
+    "GET /pdp.schemes/:scheme_id" : "fetch individual scheme object by id",
+    "PATCH /pdp.schemes/:scheme_id" : "append existing pdp.scheme object by id",
+    "POST /events" : "post a new event object"
+    }}

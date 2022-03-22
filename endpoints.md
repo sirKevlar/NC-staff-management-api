@@ -89,6 +89,6 @@ fetch individual scheme object by id ✅
 append existing pdp.scheme object by id ✅
 
 `POST /events`
-post a new event object
+post a new event object ✅
 
 **Do we need endpoints for getting all the staff associated with a student? YES**

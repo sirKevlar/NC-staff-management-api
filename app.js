@@ -1,4 +1,5 @@
 const express = require('express');
+const { getApi } = require('./controllers/api.controllers');
 const {
   getCohorts,
   postNewCohort,
@@ -32,6 +33,8 @@ const app = express();
 
 // app.use(cors())
 app.use(express.json());
+
+app.get('/api', getApi);
 
 app.get('/api/staff', getStaff);
 app.post('/api/staff', postNewStaff);
