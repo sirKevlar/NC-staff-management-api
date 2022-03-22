@@ -1,11 +1,20 @@
 const db = require('../db');
 
-exports.selectStudents = ({ cohort }) => {
+exports.selectStudents = (queries) => {
+  const queryKeyGreenList = ['cohort', undefined];
+  if (!queryKeyGreenList.includes(Object.keys(queries)[0])) {
+    return Promise.reject({ status: 400, msg: 'Bad request' });
+  }
+  
   let queryStr = `SELECT * FROM students`;
+  let queryInsert = [];
 
-  if (cohort) queryStr += ` WHERE cohort_name = $1`;
+  if (queries.cohort) {
+    queryStr += ` WHERE cohort_name = $1`;
+    queryInsert.push(queries.cohort);
+  }
 
-  return db.query(queryStr, [cohort]).then(({ rows }) => {
+  return db.query(queryStr, queryInsert).then(({ rows }) => {
     if (rows.length === 0) {
       return Promise.reject({ status: 404, msg: 'filter value not found' });
     }

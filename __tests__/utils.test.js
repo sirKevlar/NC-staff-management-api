@@ -1,6 +1,6 @@
 const createLookup = require('../utils/createLookup');
 
-xdescribe('createLookup', () => {
+describe('createLookup', () => {
   test('input: empty array, output: empty object', () => {
     const input = [];
     const actual = createLookup(input);

@@ -1,39 +1,45 @@
 const db = require('../db');
 
-exports.selectStaff = ({
-  currentCohort,
-  role,
-  campus,
-  team,
-  pdp_scheme,
-  student,
-}) => {
+exports.selectStaff = (queries) => {
+  const queryKeyGreenList = [
+    'currentCohort',
+    'role',
+    'campus',
+    'team',
+    'pdp_scheme',
+    'student',
+    undefined,
+  ];
+  if (!queryKeyGreenList.includes(Object.keys(queries)[0])) {
+    return Promise.reject({ status: 400, msg: 'Bad request' });
+  }
+  
   let queryStr = `SELECT * FROM staff`;
-  let queryInsert;
+  let queryInsert = [];
 
-  if (currentCohort) {
-    queryInsert = currentCohort;
+  if (queries.currentCohort) {
+    queryInsert.push(queries.currentCohort);
     queryStr += ` LEFT JOIN events ON events.event_id = staff.event_id
       WHERE events.cohort = $1`;
-  } else if (role) {
-    queryInsert = role;
+  } else if (queries.role) {
+    queryInsert.push(queries.role);
     queryStr += ` WHERE role = $1`;
-  } else if (campus) {
-    queryInsert = campus;
+  } else if (queries.campus) {
+    queryInsert.push(queries.campus);
     queryStr += ` WHERE campus = $1`;
-  } else if (team) {
-    queryInsert = team;
+  } else if (queries.team) {
+    queryInsert.push(queries.team);
     queryStr += ` WHERE team = $1`;
-  } else if (pdp_scheme) {
-    queryInsert = pdp_scheme;
+  } else if (queries.pdp_scheme) {
+    queryInsert.push(queries.pdp_scheme);
     queryStr += ` WHERE pdp_scheme = $1`;
-  } else if (student) {
-    queryInsert = student;
+  } else if (queries.student) {
+    queryInsert.push(queries.student);
     queryStr += ` LEFT JOIN events ON staff.employee_name = events.employee_name 
     LEFT JOIN students ON events.cohort = students.cohort_name 
     WHERE student_id = $1`;
   }
-  return db.query(queryStr, [queryInsert]).then(({ rows }) => {
+  return db.query(queryStr, queryInsert).then(({ rows }) => {
     if (rows.length === 0) {
       return Promise.reject({ status: 404, msg: 'filter value not found' });
     }
@@ -83,7 +89,12 @@ exports.insertNewStaff = ({
 exports.selectStaffById = ({ staff_id }) => {
   return db
     .query(`SELECT * FROM staff WHERE staff_id = $1`, [staff_id])
-    .then 
+    .then(({ rows }) => {
+      if (rows.length === 0) {
+        return Promise.reject({ status: 404, msg: 'id not found' });
+      }
+      return rows[0];
+    });
 };
 
 exports.updateStaffById = ({ body, params: { staff_id } }) => {

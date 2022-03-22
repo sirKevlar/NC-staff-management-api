@@ -9,7 +9,7 @@ afterAll(() => db.end());
 beforeEach(() => seed(data));
 
 describe('endpoints', () => {
-  xdescribe('ERR: invalid path', () => {
+  describe('ERR: invalid path', () => {
     test('status 404: path not found', () => {
       return request(app)
         .get('/api/not-a-valid-path')
@@ -72,7 +72,7 @@ describe('endpoints', () => {
   /* -------------------------------
    ------- STAFF ENDPOINTS ------- 
    ------------------------------- */
-  xdescribe('GET /staff', () => {
+  describe('GET /staff', () => {
     test('status 200: fetches array of staff objects', () => {
       return request(app)
         .get('/api/staff')
@@ -101,7 +101,7 @@ describe('endpoints', () => {
   });
 
   /* ------- GET STAFF QUERIES ENDPOINTS ------- */
-  xdescribe('GET /staff queries', () => {
+  describe('GET /staff queries', () => {
     test('status 200: query to filter by currentCohort', () => {
       return request(app)
         .get('/api/staff?currentCohort=september-2021')
@@ -227,7 +227,7 @@ describe('endpoints', () => {
     });
     test('status 400: invalid query key', () => {
       return request(app)
-        .get('/api/staff?invalid=key')
+        .get('/api/staff?invalidKey=kev')
         .expect(400)
         .then(({ body }) => {
           expect(body.msg).toBe('Bad request');
@@ -235,7 +235,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- POST STAFF ENDPOINTS ------- */
-  xdescribe('POST /staff', () => {
+  describe('POST /staff', () => {
     test('status 201: staff member created', () => {
       return request(app)
         .post('/api/staff')
@@ -324,7 +324,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET STAFF BY ID ENDPOINTS ------- */
-  xdescribe('GET /staff/:staff_id', () => {
+  describe('GET /staff/:staff_id', () => {
     test('status 200: fetches single employee object', () => {
       return request(app)
         .get('/api/staff/1')
@@ -367,7 +367,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- PATCH STAFF BY ID ENDPOINTS ------- */
-  xdescribe('PATCH /staff/:staff_id', () => {
+  describe('PATCH /staff/:staff_id', () => {
     test('status 200: returns patched employee object', () => {
       return request(app)
         .patch('/api/staff/1')
@@ -413,7 +413,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- DELETE STAFF BY ID ENDPOINTS ------- */
-  xdescribe('DELETE /staff/:staff_id', () => {
+  describe('DELETE /staff/:staff_id', () => {
     test('status 204: employee deleted', () => {
       return request(app).delete('/api/staff/1').expect(204);
     });
@@ -437,7 +437,7 @@ describe('endpoints', () => {
   /* -------------------------------
    ------- STUDENTS ENDPOINTS ------- 
    ------------------------------- */
-  xdescribe('GET /students', () => {
+  describe('GET /students', () => {
     test('status 200: fetches array of student objects', () => {
       return request(app)
         .get('/api/students')
@@ -458,7 +458,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- POST STUDENT ENDPOINTS ------- */
-  xdescribe('POST /students', () => {
+  describe('POST /students', () => {
     test('status 201: student created', () => {
       return request(app)
         .post('/api/students')
@@ -507,7 +507,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET STUDENTS QUERIES ENDPOINTS ------- */
-  xdescribe('GET /students queries', () => {
+  describe('GET /students queries', () => {
     test('status 200: query to filter by cohort', () => {
       return request(app)
         .get('/api/students?cohort=september-2021')
@@ -538,7 +538,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET STUDENT BY ID ENDPOINTS ------- */
-  xdescribe('GET /student/:student_id', () => {
+  describe('GET /student/:student_id', () => {
     test('status 200: fetches single student object', () => {
       return request(app)
         .get('/api/students/1')
@@ -572,7 +572,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- PATCH STUDENT BY ID ENDPOINTS ------- */
-  xdescribe('PATCH /student/:student_id', () => {
+  describe('PATCH /student/:student_id', () => {
     test('status 200: returns patched student object', () => {
       return request(app)
         .patch('/api/students/1')
@@ -600,7 +600,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- DELETE STUDENT BY ID ENDPOINTS ------- */
-  xdescribe('DELETE /student/:student_id', () => {
+  describe('DELETE /student/:student_id', () => {
     test('status 204: student deleted', () => {
       return request(app).delete('/api/students/1').expect(204);
     });
@@ -624,7 +624,7 @@ describe('endpoints', () => {
   /* -------------------------------
    ------- COHORTS ENDPOINTS ------- 
    ------------------------------- */
-  xdescribe('GET /cohorts', () => {
+  describe('GET /cohorts', () => {
     test('status 200: fetches array of cohort objects', () => {
       return request(app)
         .get('/api/cohorts')
@@ -646,7 +646,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- POST COHORT ENDPOINTS ------- */
-  xdescribe('POST /cohorts', () => {
+  describe('POST /cohorts', () => {
     test('status 201: cohort created', () => {
       return request(app)
         .post('/api/cohorts')
@@ -710,7 +710,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET COHORT BY ID ENDPOINTS ------- */
-  xdescribe('GET /cohort/:cohort_name', () => {
+  describe('GET /cohort/:cohort_name', () => {
     test('status 200: fetches single cohort object', () => {
       return request(app)
         .get('/api/cohorts/january-2022')
@@ -739,7 +739,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- PATCH COHORT BY ID ENDPOINTS ------- */
-  xdescribe('PATCH /cohort/:cohort_name', () => {
+  describe('PATCH /cohort/:cohort_name', () => {
     test('status 200: returns patched cohort object', () => {
       return request(app)
         .patch('/api/cohorts/january-2022')
@@ -781,7 +781,7 @@ describe('endpoints', () => {
   /* -------------------------------
    ------- PDP SCHEME ENDPOINTS ------- 
    ------------------------------- */
-  xdescribe('GET /pdps', () => {
+  describe('GET /pdps', () => {
     test('status 200: fetches array of pdp_scheme objects', () => {
       return request(app)
         .get('/api/pdps')
@@ -800,7 +800,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- POST PDP ENDPOINTS ------- */
-  xdescribe('POST /pdps', () => {
+  describe('POST /pdps', () => {
     test('status 201: pdp created', () => {
       return request(app)
         .post('/api/pdps')
@@ -852,7 +852,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- GET PDP BY ID ENDPOINTS ------- */
-  xdescribe('GET /pdp/:pdp_scheme', () => {
+  describe('GET /pdp/:pdp_scheme', () => {
     test('status 200: fetches single pdp object', () => {
       return request(app)
         .get('/api/pdps/Flutter-course')
@@ -879,7 +879,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- PATCH PDP BY ID ENDPOINTS ------- */
-  xdescribe('PATCH /pdps/:pdp_scheme', () => {
+  describe('PATCH /pdps/:pdp_scheme', () => {
     test('status 200: returns patched pdp object', () => {
       return request(app)
         .patch('/api/pdps/Flutter-course')
@@ -917,7 +917,7 @@ describe('endpoints', () => {
     });
   });
   /* ------- POST EVENTS ENDPOINTS ------- */
-  xdescribe('POST /events', () => {
+  describe('POST /events', () => {
     test('status 201: event created', () => {
       return request(app)
         .post('/api/events')
